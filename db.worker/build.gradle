@@ -7,4 +7,7 @@ dependencies {
   compile "org.postgresql:postgresql:$pgDriverVersion"
   compile "kz.greetgo.depinject:greetgo.depinject:$depinjectVersion"
 
+  compile "com.zaxxer:HikariCP:3.2.0"
+
+  compile "org.testng:testng:$testNgVersion"
 }
