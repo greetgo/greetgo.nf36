@@ -1,0 +1,10 @@
+dependencies {
+  compile project(':db.worker')
+  
+  compile "kz.greetgo.db:greetgo.nf36:$greetgoDbVersion"
+
+  testCompile "kz.greetgo:greetgo.util:$greetgoUtilVersion"
+
+  testCompile fileTree(dir: rootProject.file('lib'), include: ['*.jar'])
+  
+}

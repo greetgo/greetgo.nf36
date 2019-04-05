@@ -1,1 +1,5 @@
 rootProject.name = 'greetgo.nf36'
+
+include 'nf36'
+include 'db.worker'
+include 'db.worker:utils'

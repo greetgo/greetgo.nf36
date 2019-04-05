@@ -80,6 +80,7 @@ fabric.properties
 .idea/modules.xml
 .idea/misc.xml
 .idea/vcs.xml
+.idea/compiler.xml
 *.ipr
 
 # Sonarlint plugin

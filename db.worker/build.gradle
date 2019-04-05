@@ -1,0 +1,10 @@
+dependencies {
+  compile project('utils')
+  
+  compile "kz.greetgo.db:greetgo.nf36:$greetgoDbVersion"
+
+  compile "kz.greetgo.conf:greetgo.sys_params:$configVersion"
+  compile "org.postgresql:postgresql:$pgDriverVersion"
+  compile "kz.greetgo.depinject:greetgo.depinject:$depinjectVersion"
+
+}
