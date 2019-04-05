@@ -1,6 +1,6 @@
 #Directory lib
 
-This directory for Oracle Driver.
+This directory is for Oracle Driver.
 
 You may download file ojdbc7.jar (version 11+) from official Oracle site and put it in this directory.
 

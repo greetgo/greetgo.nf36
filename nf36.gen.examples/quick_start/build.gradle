@@ -1,0 +1,9 @@
+dependencies {
+  
+  compile "org.postgresql:postgresql:$pgDriverVersion"
+  compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1.1'
+  compile 'org.easytesting:fest-assert-core:2.0M10'
+
+  compile "kz.greetgo.db:greetgo.db:$greetgoDbVersion"
+
+}

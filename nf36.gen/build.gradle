@@ -1,0 +1,8 @@
+
+dependencies {
+  compile project(':nf36')
+
+  compile group: 'kz.greetgo', name: 'greetgo.class_scanner', version: "$greetgoClassScannerVersion"
+
+  compile "kz.greetgo.db:greetgo.db:$greetgoDbVersion"
+}

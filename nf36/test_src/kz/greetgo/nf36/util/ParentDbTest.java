@@ -1,15 +1,15 @@
 package kz.greetgo.nf36.util;
 
 import kz.greetgo.db.ConnectionCallback;
-import kz.greetgo.db.worker.connector.DatabaseConnector;
+import kz.greetgo.nf36.db.worker.connector.DatabaseConnector;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 
-import static kz.greetgo.db.worker.connector.DatabaseConnectorBuilder.newDatabaseConnectorBuilder;
-import static kz.greetgo.db.worker.utils.DbUtils.extractSqlException;
+import static kz.greetgo.nf36.db.worker.connector.DatabaseConnectorBuilder.newDatabaseConnectorBuilder;
+import static kz.greetgo.nf36.db.worker.utils.DbUtils.extractSqlException;
 
 public class ParentDbTest {
 

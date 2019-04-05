@@ -1,5 +1,8 @@
 rootProject.name = 'greetgo.nf36'
 
 include 'nf36'
+include 'nf36.gen'
 include 'db.worker'
 include 'db.worker:utils'
+include 'nf36.gen.examples:quick_start'
+include 'nf36.gen.examples:with_depinject'

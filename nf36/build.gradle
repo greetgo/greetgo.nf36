@@ -1,7 +1,8 @@
+
 dependencies {
   compile project(':db.worker')
   
-  compile "kz.greetgo.db:greetgo.nf36:$greetgoDbVersion"
+  compile "kz.greetgo.db:greetgo.db:$greetgoDbVersion"
 
   testCompile "kz.greetgo:greetgo.util:$greetgoUtilVersion"
 
