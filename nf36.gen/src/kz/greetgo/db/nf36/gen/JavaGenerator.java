@@ -1166,6 +1166,11 @@ public class JavaGenerator {
   }
 
   private void printMoreMethodImpl(JavaFilePrinter p, UpsertInfo info, String implInterfaceName) {
+
+    if (info.moreMethodName() == null) {
+      return;
+    }
+
     p.ofs(1).prn("@Override");
     p.ofs(1).prn("public " + implInterfaceName + " " + info.moreMethodName() + "(" + (
 
