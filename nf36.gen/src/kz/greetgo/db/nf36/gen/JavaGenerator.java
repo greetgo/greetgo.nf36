@@ -671,6 +671,8 @@ public class JavaGenerator {
       p.ofs(1).prn(info.interfaceClassName() + " " + fieldName + "(" + fieldType + " " + fieldName + ");").prn();
     }
 
+//    if (info.moreMethodName() != null) {
+
     p.ofs(1).pr(p.i(info.interfaceFullName()))
       .pr(" ").pr(info.moreMethodName()).prn("(" + (
 
@@ -681,6 +683,8 @@ public class JavaGenerator {
         .collect(joining(", "))
 
     ) + ");").prn();
+
+//    }
 
     p.ofs(1).prn("void " + info.commitMethodName() + "();");
 
