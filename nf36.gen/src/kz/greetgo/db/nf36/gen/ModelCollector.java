@@ -6,6 +6,7 @@ import kz.greetgo.nf36.core.Nf3Entity;
 import kz.greetgo.nf36.model.Nf3Field;
 import kz.greetgo.nf36.model.Nf3Table;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -295,8 +296,8 @@ public class ModelCollector {
     for (Class<?> aClass : classScanner.scanPackage(classForPackage.getPackage().getName())) {
       if (aClass.getAnnotation(Nf3Entity.class) != null) {
         try {
-          register(aClass.newInstance());
-        } catch (InstantiationException | IllegalAccessException e) {
+          register(aClass.getDeclaredConstructor().newInstance());
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
           throw new RuntimeException(e);
         }
       }
