@@ -21,9 +21,9 @@ class Nf3TableImpl implements Nf3Table {
     this.owner = owner;
 
     fields = Arrays.stream(definer.getClass().getFields())
-        .map(f -> new Nf3FieldImpl(this, definer, f, owner))
-        .filter(Nf3FieldImpl::notIgnoring)
-        .collect(Collectors.toList());
+      .map(f -> new Nf3FieldImpl(this, definer, f, owner))
+      .filter(Nf3FieldImpl::notIgnoring)
+      .collect(Collectors.toList());
   }
 
   @Override
@@ -43,7 +43,7 @@ class Nf3TableImpl implements Nf3Table {
 
   @Override
   public String nf6prefix() {
-    return owner.nf6prefix;
+    return owner.nf6prefix();
   }
 
   @Override

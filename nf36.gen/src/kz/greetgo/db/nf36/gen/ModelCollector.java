@@ -24,7 +24,7 @@ public class ModelCollector {
 
   int idLength;
   String nf3prefix;
-  String nf6prefix;
+  private String nf6prefix = null;
   int enumLength = 0;
   String nf6TableSeparator = "_";
   String nf6timeField = "ts";
@@ -45,6 +45,10 @@ public class ModelCollector {
   public ModelCollector setSourceBasePackage(String sourceBasePackage) {
     this.sourceBasePackage = sourceBasePackage;
     return this;
+  }
+
+  public String nf6prefix() {
+    return nf6prefix;
   }
 
   @SuppressWarnings("unused")
