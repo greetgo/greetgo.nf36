@@ -671,20 +671,20 @@ public class JavaGenerator {
       p.ofs(1).prn(info.interfaceClassName() + " " + fieldName + "(" + fieldType + " " + fieldName + ");").prn();
     }
 
-//    if (info.moreMethodName() != null) {
+    if (info.moreMethodName() != null) {
 
-    p.ofs(1).pr(p.i(info.interfaceFullName()))
-      .pr(" ").pr(info.moreMethodName()).prn("(" + (
+      p.ofs(1).pr(p.i(info.interfaceFullName()))
+        .pr(" ").pr(info.moreMethodName()).prn("(" + (
 
-      info.fields().stream()
-        .filter(Nf3Field::isId)
-        .sorted(comparing(Nf3Field::idOrder))
-        .map(f -> p.i(f.javaType().getName()) + " " + f.javaName())
-        .collect(joining(", "))
+        info.fields().stream()
+          .filter(Nf3Field::isId)
+          .sorted(comparing(Nf3Field::idOrder))
+          .map(f -> p.i(f.javaType().getName()) + " " + f.javaName())
+          .collect(joining(", "))
 
-    ) + ");").prn();
+      ) + ");").prn();
 
-//    }
+    }
 
     p.ofs(1).prn("void " + info.commitMethodName() + "();");
 
