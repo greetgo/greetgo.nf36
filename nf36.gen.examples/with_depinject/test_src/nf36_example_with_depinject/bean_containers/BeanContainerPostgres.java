@@ -18,7 +18,8 @@ import nf36_example_with_depinject.generators.ExampleGenerators;
   BeanConfigDbWorkerPostgres.class,
 })
 public interface BeanContainerPostgres extends BeanContainer {
-  static BeanContainerPostgres create() throws Exception {
+
+  static BeanContainerPostgres create() {
     try {
       return Depinject.newInstance(BeanContainerPostgres.class);
     } catch (NoImplementor ignore) {

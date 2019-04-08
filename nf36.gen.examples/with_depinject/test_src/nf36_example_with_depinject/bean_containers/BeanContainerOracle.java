@@ -1,13 +1,13 @@
 package nf36_example_with_depinject.bean_containers;
 
-import kz.greetgo.nf36.db.worker.util.Places;
-import kz.greetgo.nf36.db.worker.oracle.BeanConfigDbWorkerOracle;
-import kz.greetgo.nf36.db.worker.oracle.DbWorkerOracle;
 import kz.greetgo.depinject.Depinject;
 import kz.greetgo.depinject.NoImplementor;
 import kz.greetgo.depinject.core.BeanContainer;
 import kz.greetgo.depinject.core.Include;
 import kz.greetgo.depinject.gen.DepinjectUtil;
+import kz.greetgo.nf36.db.worker.oracle.BeanConfigDbWorkerOracle;
+import kz.greetgo.nf36.db.worker.oracle.DbWorkerOracle;
+import kz.greetgo.nf36.db.worker.util.Places;
 import nf36_example_with_depinject.conf.oracle.BeanConfigOracleConf;
 import nf36_example_with_depinject.generators.BeanConfigGenerators;
 import nf36_example_with_depinject.generators.ExampleGenerators;
@@ -19,13 +19,13 @@ import nf36_example_with_depinject.generators.ExampleGenerators;
 })
 public interface BeanContainerOracle extends BeanContainer {
 
-  static BeanContainerOracle create() throws Exception {
+  static BeanContainerOracle create() {
     try {
       return Depinject.newInstance(BeanContainerOracle.class);
     } catch (NoImplementor ignore) {
       DepinjectUtil.implementAndUseBeanContainers(
         "nf36_example_with_depinject.bean_containers",
-        Places.withDepinjectDir() + "/build/bean_containers_impl");
+        Places.withDepinjectDir().resolve("build").resolve("bean_containers_impl").toString());
       return Depinject.newInstance(BeanContainerOracle.class);
     }
   }
@@ -33,4 +33,5 @@ public interface BeanContainerOracle extends BeanContainer {
   DbWorkerOracle dbWorker();
 
   ExampleGenerators generators();
+
 }

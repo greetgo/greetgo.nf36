@@ -25,7 +25,7 @@ public class ExampleHistorySelectorPostgresTest extends ParentDbTests {
   public BeanGetter<ExampleHistorySelector> exampleHistorySelector;
 
   @Test
-  public void selectHistoryOfClient() throws Exception {
+  public void selectHistoryOfClient() {
 
     authorGetterImpl.get().author = "Сталина на вас нет!";
 

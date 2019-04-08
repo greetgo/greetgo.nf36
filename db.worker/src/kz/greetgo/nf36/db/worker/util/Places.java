@@ -1,17 +1,29 @@
 package kz.greetgo.nf36.db.worker.util;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Places {
-  public static String withDepinjectDir() {
-    if (new File("greetgo.nf36.gen.examples/with_depinject").isDirectory()) {
-      return "greetgo.nf36.gen.examples/with_depinject";
+
+  private static Path rootProjectDir() {
+
+    for (String dir : ". .. ../.. ../../..".trim().split("\\s+")) {
+      Path aDir = Paths.get(dir);
+      if (Files.exists(aDir.resolve(".greetgo").resolve("project-name.txt"))) {
+        return aDir;
+      }
     }
 
-    if (new File("../with_depinject").isDirectory()) {
-      return "../with_depinject";
-    }
+    throw new RuntimeException("Cannot find root project from dir: "
+      + new File(".").getAbsoluteFile().toPath().normalize());
 
-    throw new RuntimeException("Cannot file example project");
+  }
+
+  public static Path withDepinjectDir() {
+
+    return rootProjectDir().resolve("nf36.gen.examples").resolve("with_depinject");
+
   }
 }
