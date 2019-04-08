@@ -35,4 +35,6 @@ interface UpsertInfo {
   Class<?> source();
 
   String nf6TableName(Nf3Field f);
+
+  boolean hasNf6();
 }
