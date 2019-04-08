@@ -5,10 +5,10 @@ import kz.greetgo.db.nf36.gen.DdlGenerator;
 import kz.greetgo.db.nf36.gen.JavaGenerator;
 import kz.greetgo.db.nf36.gen.ModelCollector;
 import kz.greetgo.db.nf36.gen.SqlDialect;
-import kz.greetgo.nf36.db.worker.db.DbParameters;
 import kz.greetgo.depinject.core.Bean;
 import kz.greetgo.depinject.core.BeanGetter;
 import kz.greetgo.depinject.core.HasAfterInject;
+import kz.greetgo.nf36.db.worker.db.DbParameters;
 import nf36_example_with_depinject.structure.Client;
 
 import java.io.File;
@@ -27,44 +27,44 @@ public class ExampleGenerators implements HasAfterInject {
   private JavaGenerator javaGenerator;
 
   @Override
-  public void afterInject() throws Exception {
+  public void afterInject() {
     ModelCollector collector = ModelCollector
-        .newCollector()
-        .setNf3Prefix(/*empty*/"")
-        .setNf6Prefix(dbParameters.get().nf6prefix())
-        .setEnumLength(51)
-        .setNf3CreatedAtField("created_at")
-        .setNf3ModifiedAtField("mod_at")
-        .setAuthorFields("created_by", "modified_by", "inserted_by", AuthorType.STR, 37)
-        .setIdLength(31)
-        .setDefaultLength(301)
-        .setShortLength(51)
-        .setLongLength(2001)
-        .setCommitMethodName("commit")
-//        .setMoreMethodName("more")
-        .setSequencePrefix("s_")
-        .scanPackageOfClassRecursively(Client.class, true);
+      .newCollector()
+      .setNf3Prefix(/*empty*/"")
+      .setNf6Prefix(dbParameters.get().nf6prefix())
+      .setEnumLength(51)
+      .setNf3CreatedAtField("created_at")
+      .setNf3ModifiedAtField("mod_at")
+      .setAuthorFields("created_by", "modified_by", "inserted_by", AuthorType.STR, 37)
+      .setIdLength(31)
+      .setDefaultLength(301)
+      .setShortLength(51)
+      .setLongLength(2001)
+      .setCommitMethodName("commit")
+      .setMoreMethodName("more")
+      .setSequencePrefix("s_")
+      .scanPackageOfClassRecursively(Client.class, true);
 
     javaGenerator = JavaGenerator.newGenerator(collector)
-        .setInterfaceOutDir("left 1")
-        .setImplOutDir("left 2")
-        .setOutDir(withDepinjectDir() + "/src")
-        .setCleanOutDirsBeforeGeneration(true)
-        .setInterfaceBasePackage("nf36_example_with_depinject.generated.faces")
-        .setImplBasePackage("nf36_example_with_depinject.generated.impl." + dbParameters.get().baseSubPackage())
-        .setUpserterClassName("ExampleUpserter")
-        .setUpdaterClassName("ExampleUpdater")
-        .setUpserterImplClassName("AbstractExampleUpserter" + dbParameters.get().mainClassesSuffix())
-        .setUpdaterImplClassName("AbstractExampleUpdater" + dbParameters.get().mainClassesSuffix())
-        .setGenerateSaver(true)
-        .setHistorySelectorClassName("ExampleHistorySelector",
-            "AbstractExampleHistorySelector" + dbParameters.get().mainClassesSuffix())
-        .setAbstracting(true)
+      .setInterfaceOutDir("left 1")
+      .setImplOutDir("left 2")
+      .setOutDir(withDepinjectDir() + "/src")
+      .setCleanOutDirsBeforeGeneration(true)
+      .setInterfaceBasePackage("nf36_example_with_depinject.generated.faces")
+      .setImplBasePackage("nf36_example_with_depinject.generated.impl." + dbParameters.get().baseSubPackage())
+      .setUpserterClassName("ExampleUpserter")
+      .setUpdaterClassName("ExampleUpdater")
+      .setUpserterImplClassName("AbstractExampleUpserter" + dbParameters.get().mainClassesSuffix())
+      .setUpdaterImplClassName("AbstractExampleUpdater" + dbParameters.get().mainClassesSuffix())
+      .setGenerateSaver(true)
+      .setHistorySelectorClassName("ExampleHistorySelector",
+        "AbstractExampleHistorySelector" + dbParameters.get().mainClassesSuffix())
+      .setAbstracting(true)
     ;
 
     ddlGenerator = DdlGenerator.newGenerator(collector)
-        .setSqlDialect(sqlDialect.get())
-        .setCommandSeparator(";;")
+      .setSqlDialect(sqlDialect.get())
+      .setCommandSeparator(";;")
     ;
   }
 
