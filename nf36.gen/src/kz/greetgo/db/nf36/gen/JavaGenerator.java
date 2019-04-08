@@ -16,6 +16,7 @@ import kz.greetgo.nf36.model.Sequence;
 import kz.greetgo.nf36.utils.UtilsNf36;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -35,10 +36,10 @@ import static kz.greetgo.nf36.utils.UtilsNf36.resolvePackage;
 import static kz.greetgo.nf36.utils.UtilsNf36.selectName;
 
 public class JavaGenerator {
-  String interfaceOutDir;
+  String interfaceOutDir1;
   String interfaceBasePackage;
 
-  String implOutDir;
+  String implOutDir1;
   String implBasePackage;
 
   String upserterClassName;
@@ -50,6 +51,14 @@ public class JavaGenerator {
   String updaterImplClassName = null;
 
   private final ModelCollector collector;
+
+  private String interfaceOutDir() {
+    return collector.tmpInterfacesDir().toString();
+  }
+
+  private String implOutDir() {
+    return collector.tmpImplDir().toString();
+  }
 
   private String upserterImplClassName() {
     if (upserterClassName == null) {
@@ -73,8 +82,8 @@ public class JavaGenerator {
   }
 
   public JavaGenerator setOutDir(String outDir) {
-    this.interfaceOutDir = outDir;
-    this.implOutDir = outDir;
+    this.interfaceOutDir1 = outDir;
+    this.implOutDir1 = outDir;
     return this;
   }
 
@@ -116,12 +125,12 @@ public class JavaGenerator {
   }
 
   public JavaGenerator setInterfaceOutDir(String interfaceOutDir) {
-    this.interfaceOutDir = interfaceOutDir;
+    this.interfaceOutDir1 = interfaceOutDir;
     return this;
   }
 
   public JavaGenerator setImplOutDir(String implOutDir) {
-    this.implOutDir = implOutDir;
+    this.implOutDir1 = implOutDir;
     return this;
   }
 
@@ -138,9 +147,8 @@ public class JavaGenerator {
   public void generate() {
     collector.collect();
 
-    if (cleanOutDirsBeforeGeneration) {
-      cleanOutDirs();
-    }
+    UtilsNf36.cleanDir(implOutDir());
+    UtilsNf36.cleanDir(interfaceOutDir());
 
     {
       String upserterInterfaceClassName = generateMainUpserterInterface();
@@ -188,11 +196,18 @@ public class JavaGenerator {
       }
 
     }
-  }
 
-  private void cleanOutDirs() {
-    UtilsNf36.cleanDir(UtilsNf36.packageDir(implOutDir, implBasePackage));
-    UtilsNf36.cleanDir(UtilsNf36.packageDir(interfaceOutDir, interfaceBasePackage));
+    if (cleanOutDirsBeforeGeneration) {
+      UtilsNf36.cleanDir(UtilsNf36.packageDir(implOutDir1, implBasePackage));
+      UtilsNf36.cleanDir(UtilsNf36.packageDir(interfaceOutDir1, interfaceBasePackage));
+    }
+
+    UtilsNf36.copyDirContent(implOutDir(), implOutDir1);
+    UtilsNf36.copyDirContent(interfaceOutDir(), interfaceOutDir1);
+
+    UtilsNf36.cleanDir(implOutDir());
+    UtilsNf36.cleanDir(interfaceOutDir());
+
   }
 
   boolean cleanOutDirsBeforeGeneration = true;
@@ -210,13 +225,13 @@ public class JavaGenerator {
 
     String interfaceClassName = nf3Table.source().getSimpleName() + "Save";
     String interfacePackageName = resolvePackage(interfaceBasePackage, subPackage);
-    File interfaceJavaFile = resolveJavaFile(interfaceOutDir, interfacePackageName, interfaceClassName);
+    File interfaceJavaFile = resolveJavaFile(interfaceOutDir(), interfacePackageName, interfaceClassName);
 
     String interfaceFullName = resolveFullName(interfacePackageName, interfaceClassName);
 
     String implClassName = interfaceClassName + "Impl";
     String implPackageName = resolvePackage(implBasePackage, subPackage);
-    File implJavaFile = resolveJavaFile(implOutDir, implPackageName, implClassName);
+    File implJavaFile = resolveJavaFile(implOutDir(), implPackageName, implClassName);
 
     String implFullName = resolveFullName(implPackageName, implClassName);
 
@@ -312,11 +327,11 @@ public class JavaGenerator {
 
     String interfaceClassName = nf3Table.source().getSimpleName() + "HistorySelector";
     String interfacePackageName = resolvePackage(interfaceBasePackage, subPackage);
-    File interfaceJavaFile = resolveJavaFile(interfaceOutDir, interfacePackageName, interfaceClassName);
+    File interfaceJavaFile = resolveJavaFile(interfaceOutDir(), interfacePackageName, interfaceClassName);
 
     String implClassName = interfaceClassName + "Impl";
     String implPackageName = resolvePackage(implBasePackage, subPackage);
-    File implJavaFile = resolveJavaFile(implOutDir, implPackageName, implClassName);
+    File implJavaFile = resolveJavaFile(implOutDir(), implPackageName, implClassName);
 
     return new HistorySelectorInfo() {
       @Override
@@ -389,11 +404,11 @@ public class JavaGenerator {
 
     String interfaceClassName = nf3Table.source().getSimpleName() + "Upsert";
     String interfacePackageName = resolvePackage(interfaceBasePackage, subPackage);
-    File interfaceJavaFile = resolveJavaFile(interfaceOutDir, interfacePackageName, interfaceClassName);
+    File interfaceJavaFile = resolveJavaFile(interfaceOutDir(), interfacePackageName, interfaceClassName);
 
     String implClassName = interfaceClassName + "Impl";
     String implPackageName = resolvePackage(implBasePackage, subPackage);
-    File implJavaFile = resolveJavaFile(implOutDir, implPackageName, implClassName);
+    File implJavaFile = resolveJavaFile(implOutDir(), implPackageName, implClassName);
 
     String accessToEntityMethodName = firstToLow(nf3Table.source().getSimpleName());
 
@@ -495,11 +510,11 @@ public class JavaGenerator {
 
     String interfaceClassName = nf3Table.source().getSimpleName() + "Update";
     String interfacePackageName = resolvePackage(interfaceBasePackage, subPackage);
-    File interfaceJavaFile = resolveJavaFile(interfaceOutDir, interfacePackageName, interfaceClassName);
+    File interfaceJavaFile = resolveJavaFile(interfaceOutDir(), interfacePackageName, interfaceClassName);
 
     String implClassName = interfaceClassName + "Impl";
     String implPackageName = resolvePackage(implBasePackage, subPackage);
-    File implJavaFile = resolveJavaFile(implOutDir, implPackageName, implClassName);
+    File implJavaFile = resolveJavaFile(implOutDir(), implPackageName, implClassName);
 
     String interfaceFullName = resolveFullName(interfacePackageName, interfaceClassName);
 
@@ -861,7 +876,7 @@ public class JavaGenerator {
         p.ofs(1).prn("public " + info.interfaceClassName() + " " + toName + "(String " + alias + ") {");
         p.ofs(2).prn("historySelector.field(\"" + info.nf6TableName(f) + "\", \"" + f.dbName() + "\", null);");
         p.ofs(2).prn("historySelector.addFieldAlias(\"" + f.dbName() + "\", " + alias + ");");
-        p.ofs(2).prn("return this;");
+        p.ofs(2).prn("return this" + ";");
         p.ofs(1).prn("}").prn();
       }
     }
@@ -1189,7 +1204,7 @@ public class JavaGenerator {
 
     }
 
-    p.printToFile(resolveJavaFile(interfaceOutDir, interfaceBasePackage, historySelectorNames.interfaceClassName));
+    p.printToFile(resolveJavaFile(interfaceOutDir(), interfaceBasePackage, historySelectorNames.interfaceClassName));
 
     return resolveFullName(interfaceBasePackage, historySelectorNames.interfaceClassName);
   }
@@ -1217,7 +1232,7 @@ public class JavaGenerator {
       }
     }
 
-    p.printToFile(resolveJavaFile(interfaceOutDir, interfaceBasePackage, upserterClassName));
+    p.printToFile(resolveJavaFile(interfaceOutDir(), interfaceBasePackage, upserterClassName));
 
     return resolveFullName(interfaceBasePackage, upserterClassName);
   }
@@ -1232,7 +1247,7 @@ public class JavaGenerator {
       printUpdateInterfaceMethod(p, nf3Table);
     }
 
-    p.printToFile(resolveJavaFile(interfaceOutDir, interfaceBasePackage, updaterClassName));
+    p.printToFile(resolveJavaFile(interfaceOutDir(), interfaceBasePackage, updaterClassName));
 
     return resolveFullName(interfaceBasePackage, updaterClassName);
   }
@@ -1274,7 +1289,7 @@ public class JavaGenerator {
 
     }
 
-    p.printToFile(resolveJavaFile(implOutDir, implBasePackage, historySelectorNames.implClassName));
+    p.printToFile(resolveJavaFile(implOutDir(), implBasePackage, historySelectorNames.implClassName));
   }
 
   private void generateMainUpserterImpl(String upserterInterfaceClassName) {
@@ -1303,7 +1318,7 @@ public class JavaGenerator {
       }
     }
 
-    p.printToFile(resolveJavaFile(implOutDir, implBasePackage, upserterImplClassName()));
+    p.printToFile(resolveJavaFile(implOutDir(), implBasePackage, upserterImplClassName()));
   }
 
 
@@ -1320,7 +1335,7 @@ public class JavaGenerator {
       printUpdateImplMethod(p, nf3Table);
     }
 
-    p.printToFile(resolveJavaFile(implOutDir, implBasePackage, updaterImplClassName()));
+    p.printToFile(resolveJavaFile(implOutDir(), implBasePackage, updaterImplClassName()));
   }
 
   String upserterCreateMethod = "createUpserter";
@@ -1369,6 +1384,7 @@ public class JavaGenerator {
     return this;
   }
 
+  @SuppressWarnings("Duplicates")
   private void printCreateSaverMethod(JavaFilePrinter p) {
 
     String saverClassName = p.i(Nf36Saver.class.getName());
@@ -1388,6 +1404,7 @@ public class JavaGenerator {
     p.ofs(1).prn("}").prn();
   }
 
+  @SuppressWarnings("Duplicates")
   private void printCreateUpserterMethod(JavaFilePrinter p) {
     String upserterClassName = p.i(Nf36Upserter.class.getName());
 
@@ -1406,6 +1423,7 @@ public class JavaGenerator {
     p.ofs(1).prn("}").prn();
   }
 
+  @SuppressWarnings("Duplicates")
   private void printGetSequenceNextMethod(JavaFilePrinter p) {
     String sequenceNextClassName = p.i(SequenceNext.class.getName());
 
@@ -1424,6 +1442,7 @@ public class JavaGenerator {
     p.ofs(1).prn("}").prn();
   }
 
+  @SuppressWarnings("Duplicates")
   private void printCreateUpdaterMethod(JavaFilePrinter p) {
     String updaterClassName = p.i(Nf36Updater.class.getName());
 

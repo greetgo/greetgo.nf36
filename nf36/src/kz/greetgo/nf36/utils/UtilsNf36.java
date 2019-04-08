@@ -5,6 +5,9 @@ import kz.greetgo.nf36.errors.IllegalPackage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -67,6 +70,7 @@ public class UtilsNf36 {
     }
 
     if (killMe) {
+      //noinspection ResultOfMethodCallIgnored
       file.delete();
     }
   }
@@ -80,9 +84,9 @@ public class UtilsNf36 {
 
   public static String javaNameToDbName(String javaName) {
     int sourceLen = javaName.length();
-    char source[] = new char[sourceLen];
+    char[] source = new char[sourceLen];
     javaName.getChars(0, sourceLen, source, 0);
-    char dest[] = new char[source.length * 2];
+    char[] dest = new char[source.length * 2];
     int j = 0;
     boolean wasLow = false;
     for (int i = 0; i < sourceLen; i++) {
@@ -103,7 +107,9 @@ public class UtilsNf36 {
   }
 
   public static String packageDir(String srcDir, String packageName) {
-    if (packageName == null) { return srcDir; }
+    if (packageName == null) {
+      return srcDir;
+    }
     return srcDir + "/" + packageName.replace('.', '/');
   }
 
@@ -161,7 +167,7 @@ public class UtilsNf36 {
 
       while (true) {
         StringBuilder sb = new StringBuilder();
-        char buffer[] = new char[1024 * 4];
+        char[] buffer = new char[1024 * 4];
         int count = characterStream.read(buffer);
         if (count < 0) {
           return sb.toString();
@@ -225,5 +231,38 @@ public class UtilsNf36 {
     } else {
       return nameCanHaveDots.substring(i + 1);
     }
+  }
+
+  public static void copyDirContent(String fromDir, String toDir) {
+    copyDirContent(Paths.get(fromDir), Paths.get(toDir));
+  }
+
+  public static void copyDirContent(Path fromDir, Path toDir) {
+    File[] files = fromDir.toFile().listFiles();
+
+    if (files == null) {
+      return;
+    }
+
+    for (File file : files) {
+
+      if (file.isFile()) {
+        Path toFile = toDir.resolve(file.getName());
+        toFile.toFile().getParentFile().mkdirs();
+        try {
+          Files.write(toFile, Files.readAllBytes(file.toPath()));
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+        continue;
+      }
+
+      if (file.isDirectory()) {
+        copyDirContent(file.toPath(), toDir.resolve(file.getName()));
+        continue;
+      }
+
+    }
+
   }
 }

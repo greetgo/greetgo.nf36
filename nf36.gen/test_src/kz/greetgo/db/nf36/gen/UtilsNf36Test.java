@@ -5,7 +5,12 @@ import kz.greetgo.nf36.utils.UtilsNf36;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.concurrent.ThreadLocalRandom;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class UtilsNf36Test {
@@ -159,4 +164,59 @@ public class UtilsNf36Test {
     String actual = UtilsNf36.extractAfterDot("the_east.The north.Hello_World");
     assertThat(actual).isEqualTo("Hello_World");
   }
+
+  private static void newFile(Path path, String subName, String content) throws Exception {
+    for (String sub : subName.split("/")) {
+      path = path.resolve(sub);
+    }
+
+    path.toFile().getParentFile().mkdirs();
+    Files.write(path, content.getBytes(UTF_8));
+  }
+
+  private void assertContent(Path path, String subName, String content) throws Exception {
+    for (String sub : subName.split("/")) {
+      path = path.resolve(sub);
+    }
+
+    assertThat(path.toFile()).exists();
+
+    String actualContent = Files.readString(path);
+
+    assertThat(actualContent).describedAs("File " + path).isEqualTo(content);
+  }
+
+  @Test
+  public void copyDirContent() throws Exception {
+
+    int i = ThreadLocalRandom.current().nextInt();
+    if (i < 0) i = -i;
+
+    Path tmp = Paths.get("build").resolve(UtilsNf36Test.class.getSimpleName()).resolve("copyDirContent_" + i);
+
+    Path from = tmp.resolve("from");
+    Path to = tmp.resolve("to").resolve("status").resolve("example");
+
+    newFile(from, "sinus.txt", "hello from sinus");
+    newFile(from, ".hidden.txt", "hello from hidden");
+    newFile(from, "hello/dem.txt", "hello from hello/dem");
+    newFile(from, "hello/.hid.txt", "hello from hello/.hid");
+    newFile(from, "pin/status/quads.txt", "hello from pin/status/quads");
+    newFile(from, "wow/current/life/.hin.txt", "hello from wow/current/life/.hin");
+
+    //
+    //
+    UtilsNf36.copyDirContent(from.toString(), to.toString());
+    //
+    //
+
+    assertContent(to, "sinus.txt", "hello from sinus");
+    assertContent(to, ".hidden.txt", "hello from hidden");
+    assertContent(to, "hello/dem.txt", "hello from hello/dem");
+    assertContent(to, "hello/.hid.txt", "hello from hello/.hid");
+    assertContent(to, "pin/status/quads.txt", "hello from pin/status/quads");
+    assertContent(to, "wow/current/life/.hin.txt", "hello from wow/current/life/.hin");
+
+  }
+
 }
