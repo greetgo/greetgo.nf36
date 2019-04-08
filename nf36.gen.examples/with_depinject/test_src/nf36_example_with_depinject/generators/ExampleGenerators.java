@@ -41,7 +41,7 @@ public class ExampleGenerators implements HasAfterInject {
       .setShortLength(51)
       .setLongLength(2001)
       .setCommitMethodName("commit")
-//      .setMoreMethodName("more")
+      .setMoreMethodName("more")
       .setSequencePrefix("s_")
       .scanPackageOfClassRecursively(Client.class, true);
 
