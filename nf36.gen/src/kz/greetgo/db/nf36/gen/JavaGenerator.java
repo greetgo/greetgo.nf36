@@ -16,7 +16,6 @@ import kz.greetgo.nf36.model.Sequence;
 import kz.greetgo.nf36.utils.UtilsNf36;
 
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;

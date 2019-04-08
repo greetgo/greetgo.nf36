@@ -82,9 +82,6 @@ public class ModelCollector {
   }
 
   public String moreMethodName() {
-    if (moreMethodName == null) {
-      throw new NullPointerException("moreMethodName == null");
-    }
     return moreMethodName;
   }
 
