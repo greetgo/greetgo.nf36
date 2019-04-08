@@ -7,6 +7,8 @@ import kz.greetgo.nf36.model.Nf3Field;
 import kz.greetgo.nf36.model.Nf3Table;
 
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,6 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -36,6 +39,7 @@ public class ModelCollector {
   private String sequencePrefix = null;
   private ClassScanner classScanner = new ClassScannerDef();
   String sourceBasePackage;
+  private Path tempDir = null;
 
   @SuppressWarnings("UnusedReturnValue")
   public ModelCollector setSourceBasePackage(String sourceBasePackage) {
@@ -149,8 +153,47 @@ public class ModelCollector {
     return this;
   }
 
+  @SuppressWarnings("unused")
+  public ModelCollector setTempDir(Path tempDir) {
+    this.tempDir = tempDir;
+    return this;
+  }
+
+  @SuppressWarnings("unused")
+  public ModelCollector setTempDir(String tempDir) {
+    this.tempDir = Paths.get(tempDir);
+    return this;
+  }
+
   final List<Object> registeredObjects = new ArrayList<>();
 
+  private Path tmpDir() {
+    {
+      Path tmp = this.tempDir;
+      if (tmp != null) {
+        return tmp;
+      }
+    }
+
+    {
+      int i = ThreadLocalRandom.current().nextInt();
+      if (i < 0) {
+        i = -i;
+      }
+
+      Path tmp = Paths.get(System.getProperty("java.io.tmpdir")).resolve("nf36").resolve("" + i);
+      this.tempDir = tmp;
+      return tmp;
+    }
+  }
+
+  public Path tmpInterfacesDir() {
+    return tmpDir().resolve("interfaces");
+  }
+
+  public Path tmpImplDir() {
+    return tmpDir().resolve("implementations");
+  }
 
   @SuppressWarnings("UnusedReturnValue")
   public ModelCollector register(Object object) {
