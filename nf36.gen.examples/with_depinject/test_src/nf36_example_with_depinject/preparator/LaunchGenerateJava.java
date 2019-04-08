@@ -4,7 +4,7 @@ import nf36_example_with_depinject.bean_containers.BeanContainerOracle;
 import nf36_example_with_depinject.bean_containers.BeanContainerPostgres;
 
 public class LaunchGenerateJava {
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     BeanContainerPostgres.create().generators().generateJava();
     BeanContainerOracle.create().generators().generateJava();
   }
