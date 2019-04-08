@@ -29,7 +29,7 @@ public class ModelCollector {
   int defaultLength;
   int shortLength;
   int longLength;
-  private String moreMethodName = "more";
+  private String moreMethodName = null;
   private String commitMethodName = "commit";
   private String saveMethodName = "save";
   private String sequencePrefix = null;
