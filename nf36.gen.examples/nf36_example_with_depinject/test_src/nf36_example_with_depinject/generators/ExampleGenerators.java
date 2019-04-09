@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static kz.greetgo.nf36.db.worker.util.Places.withDepinjectDir;
+import static kz.greetgo.nf36.db.worker.util.Places.nf36ExampleWithDepinject;
 
 @Bean
 public class ExampleGenerators implements HasAfterInject {
@@ -49,7 +49,7 @@ public class ExampleGenerators implements HasAfterInject {
     javaGenerator = JavaGenerator.newGenerator(collector)
       .setInterfaceOutDir("left 1")
       .setImplOutDir("left 2")
-      .setOutDir(withDepinjectDir() + "/src")
+      .setOutDir(nf36ExampleWithDepinject() + "/src")
       .setCleanOutDirsBeforeGeneration(true)
       .setInterfaceBasePackage("nf36_example_with_depinject.generated.faces")
       .setImplBasePackage("nf36_example_with_depinject.generated.impl." + dbParameters.get().baseSubPackage())
@@ -76,7 +76,7 @@ public class ExampleGenerators implements HasAfterInject {
   }
 
   public List<File> generateSqlFiles() {
-    String dir = withDepinjectDir() + "/build/gen_sql/" + sqlDialect.getClass().getSimpleName() + "/";
+    String dir = nf36ExampleWithDepinject() + "/build/gen_sql/" + sqlDialect.getClass().getSimpleName() + "/";
     List<File> sqlFileList = new ArrayList<>();
 
     {

@@ -25,7 +25,7 @@ public interface BeanContainerOracle extends BeanContainer {
     } catch (NoImplementor ignore) {
       DepinjectUtil.implementAndUseBeanContainers(
         "nf36_example_with_depinject.bean_containers",
-        Places.withDepinjectDir().resolve("build").resolve("bean_containers_impl").toString());
+        Places.nf36ExampleWithDepinject().resolve("build").resolve("bean_containers_impl").toString());
       return Depinject.newInstance(BeanContainerOracle.class);
     }
   }

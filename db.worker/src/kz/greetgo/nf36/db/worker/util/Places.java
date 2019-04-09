@@ -21,9 +21,20 @@ public class Places {
 
   }
 
-  public static Path withDepinjectDir() {
+  public static Path nf36GenExamples() {
+    return rootProjectDir().resolve("nf36.gen.examples");
+  }
 
-    return rootProjectDir().resolve("nf36.gen.examples").resolve("with_depinject");
+  public static Path nf36ExampleWithDepinject() {
+
+    return nf36GenExamples().resolve("nf36_example_with_depinject");
 
   }
+
+  public static Path nf3ExampleWithDepinject() {
+
+    return nf36GenExamples().resolve("nf3_example_with_depinject");
+
+  }
+
 }

@@ -24,8 +24,8 @@ public interface BeanContainerPostgres extends BeanContainer {
       return Depinject.newInstance(BeanContainerPostgres.class);
     } catch (NoImplementor ignore) {
       DepinjectUtil.implementAndUseBeanContainers(
-        "nf36_example_with_depinject.bean_containers",
-        Places.withDepinjectDir() + "/build/bean_containers_impl");
+        "nf3_example_with_depinject.bean_containers",
+        Places.nf3ExampleWithDepinject() + "/build/bean_containers_impl");
       return Depinject.newInstance(BeanContainerPostgres.class);
     }
   }
