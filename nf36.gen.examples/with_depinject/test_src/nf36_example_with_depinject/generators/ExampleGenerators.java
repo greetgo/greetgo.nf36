@@ -31,8 +31,7 @@ public class ExampleGenerators implements HasAfterInject {
     ModelCollector collector = ModelCollector
       .newCollector()
       .setNf3Prefix(/*empty*/"")
-      //todo pompei commented setNf6Prefix(dbParameters.get().nf6prefix())
-//      .setNf6Prefix(dbParameters.get().nf6prefix())
+      .setNf6Prefix(dbParameters.get().nf6prefix())
       .setEnumLength(51)
       .setNf3CreatedAtField("created_at")
       .setNf3ModifiedAtField("mod_at")
