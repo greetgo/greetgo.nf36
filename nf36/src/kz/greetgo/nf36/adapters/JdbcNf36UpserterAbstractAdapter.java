@@ -222,7 +222,7 @@ abstract class JdbcNf36UpserterAbstractAdapter implements Nf36Upserter, Connecti
 
     long startedAt = System.nanoTime();
 
-    //noinspection SqlNoDataSourceInspection
+    //noinspection SqlDialectInspection,SqlNoDataSourceInspection
     String sql = "select " + String.join(", ", fieldNames)
         + " from " + nf6TableName
         + " where " + keyEquals
