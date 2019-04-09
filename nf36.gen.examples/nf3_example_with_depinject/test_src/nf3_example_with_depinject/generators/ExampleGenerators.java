@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static kz.greetgo.nf36.db.worker.util.Places.nf36ExampleWithDepinject;
+import static kz.greetgo.nf36.db.worker.util.Places.nf3ExampleWithDepinject;
 
 @Bean
 public class ExampleGenerators implements HasAfterInject {
@@ -31,8 +31,7 @@ public class ExampleGenerators implements HasAfterInject {
     ModelCollector collector = ModelCollector
       .newCollector()
       .setShowDebugMarkers(false)
-      .setNf3Prefix(/*empty*/"")
-      .setNf6Prefix(dbParameters.get().nf6prefix())
+      .setNf3Prefix(/* Empty */"")
       .setEnumLength(51)
       .setNf3CreatedAtField("created_at")
       .setNf3ModifiedAtField("mod_at")
@@ -42,17 +41,17 @@ public class ExampleGenerators implements HasAfterInject {
       .setShortLength(51)
       .setLongLength(2001)
       .setCommitMethodName("commit")
-      .setMoreMethodName("more")
       .setSequencePrefix("s_")
       .scanPackageOfClassRecursively(Client.class, true);
 
-    javaGenerator = JavaGenerator.newGenerator(collector)
+    javaGenerator = JavaGenerator
+      .newGenerator(collector)
       .setInterfaceOutDir("left 1")
       .setImplOutDir("left 2")
-      .setOutDir(nf36ExampleWithDepinject() + "/src")
+      .setOutDir(nf3ExampleWithDepinject() + "/src")
       .setCleanOutDirsBeforeGeneration(true)
-      .setInterfaceBasePackage("nf36_example_with_depinject.generated.faces")
-      .setImplBasePackage("nf36_example_with_depinject.generated.impl." + dbParameters.get().baseSubPackage())
+      .setInterfaceBasePackage("nf3_example_with_depinject.generated.faces")
+      .setImplBasePackage("nf3_example_with_depinject.generated.impl." + dbParameters.get().baseSubPackage())
       .setUpserterClassName("ExampleUpserter")
       .setUpdaterClassName("ExampleUpdater")
       .setUpserterImplClassName("AbstractExampleUpserter" + dbParameters.get().mainClassesSuffix())
@@ -76,7 +75,7 @@ public class ExampleGenerators implements HasAfterInject {
   }
 
   public List<File> generateSqlFiles() {
-    String dir = nf36ExampleWithDepinject() + "/build/gen_sql/" + sqlDialect.getClass().getSimpleName() + "/";
+    String dir = nf3ExampleWithDepinject() + "/build/gen_sql/" + sqlDialect.get().getClass().getSimpleName() + "/";
     List<File> sqlFileList = new ArrayList<>();
 
     {
@@ -92,20 +91,8 @@ public class ExampleGenerators implements HasAfterInject {
     }
 
     {
-      File outFile = new File(dir + "003_nf6_tables.sql");
-      ddlGenerator.generateNf6Tables(outFile);
-      sqlFileList.add(outFile);
-    }
-
-    {
       File outFile = new File(dir + "004_nf3_references.sql");
       ddlGenerator.generateNf3References(outFile);
-      sqlFileList.add(outFile);
-    }
-
-    {
-      File outFile = new File(dir + "005_nf6_id_references.sql");
-      ddlGenerator.generateNf6IdReferences(outFile);
       sqlFileList.add(outFile);
     }
 

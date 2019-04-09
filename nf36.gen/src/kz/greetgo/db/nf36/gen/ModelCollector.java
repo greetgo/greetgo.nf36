@@ -58,6 +58,9 @@ public class ModelCollector {
   }
 
   public String nf6prefix() {
+    if (nf6prefix == null) {
+      throw new RuntimeException("NF6 did not need");
+    }
     return nf6prefix;
   }
 

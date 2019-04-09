@@ -76,7 +76,7 @@ public class ExampleGenerators implements HasAfterInject {
   }
 
   public List<File> generateSqlFiles() {
-    String dir = nf36ExampleWithDepinject() + "/build/gen_sql/" + sqlDialect.getClass().getSimpleName() + "/";
+    String dir = nf36ExampleWithDepinject() + "/build/gen_sql/" + sqlDialect.get().getClass().getSimpleName() + "/";
     List<File> sqlFileList = new ArrayList<>();
 
     {
