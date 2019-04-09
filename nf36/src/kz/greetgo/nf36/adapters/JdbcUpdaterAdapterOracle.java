@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-class JdbcNf36UpdaterAdapterOracle extends JdbcNf36UpdaterAbstractAdapter {
+class JdbcUpdaterAdapterOracle extends JdbcUpdaterAbstractAdapter {
   private List<IdValues> selectIdsForUpdate(Connection con) throws Exception {
     String sql = "select " + (
 

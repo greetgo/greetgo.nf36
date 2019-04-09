@@ -18,10 +18,10 @@ import static java.util.stream.Collectors.toSet;
 import static kz.greetgo.nf36.utils.UtilsNf36.cat;
 import static kz.greetgo.nf36.utils.UtilsNf36.selectName;
 
-class JdbcNf36UpserterAdapterOracle extends JdbcNf36UpserterAbstractAdapter {
+class JdbcUpserterAdapterOracle extends JdbcUpserterAbstractAdapter {
   @Override
-  protected JdbcNf36UpserterAbstractAdapter copyInstance() {
-    return new JdbcNf36UpserterAdapterOracle();
+  protected JdbcUpserterAbstractAdapter copyInstance() {
+    return new JdbcUpserterAdapterOracle();
   }
 
   @Override

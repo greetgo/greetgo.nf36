@@ -2,7 +2,7 @@ package kz.greetgo.nf36.adapters;
 
 import kz.greetgo.db.ConnectionCallback;
 import kz.greetgo.db.DbType;
-import kz.greetgo.nf36.core.Nf36HistorySelector;
+import kz.greetgo.nf36.core.HistorySelector;
 import kz.greetgo.nf36.util.ParentDbTest;
 import kz.greetgo.nf36.util.Use;
 import kz.greetgo.util.RND;
@@ -118,7 +118,7 @@ public class UpserterAdapterBuilderPostgresTest extends ParentDbTest {
     public String fatherName;
   }
 
-  private Nf36HistorySelector createHistorySelectorForClient() {
+  private HistorySelector createHistorySelectorForClient() {
     return newNf36Builder()
         .historySelector()
         .setLogAcceptor(new ConsoleLogAcceptor())
@@ -604,7 +604,7 @@ public class UpserterAdapterBuilderPostgresTest extends ParentDbTest {
     public String fatherNameAlias;
   }
 
-  private Nf36HistorySelector createHistorySelectorForAliasedClient() {
+  private HistorySelector createHistorySelectorForAliasedClient() {
     return createHistorySelectorForClient()
         .addIdAlias("id", "idAlias")
         .addFieldAlias("surname", "surnameAlias")

@@ -1,6 +1,6 @@
 package kz.greetgo.nf36.adapters;
 
-class JdbcNf36HistorySelectorAdapterOracle extends JdbcNf36HistorySelectorAbstractAdapter {
+class JdbcHistorySelectorAdapterOracle extends JdbcHistorySelectorAbstractAdapter {
   @Override
   protected String timestampParameter() {
     return "?";

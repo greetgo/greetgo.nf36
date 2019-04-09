@@ -1,11 +1,11 @@
 package kz.greetgo.db.nf36.gen;
 
-import kz.greetgo.nf36.core.Nf3DefaultNow;
-import kz.greetgo.nf36.core.Nf3ID;
-import kz.greetgo.nf36.core.Nf3Long;
-import kz.greetgo.nf36.core.Nf3NotNull;
-import kz.greetgo.nf36.core.Nf3Short;
-import kz.greetgo.nf36.core.Nf3Text;
+import kz.greetgo.nf36.core.DefaultNow;
+import kz.greetgo.nf36.core.ID;
+import kz.greetgo.nf36.core.LongLength;
+import kz.greetgo.nf36.core.NotNullInDb;
+import kz.greetgo.nf36.core.ShortLength;
+import kz.greetgo.nf36.core.BigTextInDb;
 import kz.greetgo.nf36.model.DbType;
 import kz.greetgo.nf36.model.SqlType;
 import org.testng.annotations.DataProvider;
@@ -75,31 +75,31 @@ public class SqlTypeUtilTest {
   static class FieldStringSource {
     public String field1;
 
-    @Nf3Text
+    @BigTextInDb
     public String field2;
 
-    @Nf3Short
+    @ShortLength
     public String field3;
 
-    @Nf3Long
+    @LongLength
     public String field4;
 
-    @Nf3NotNull
+    @NotNullInDb
     public String field1nn;
 
-    @Nf3Text
-    @Nf3NotNull
+    @BigTextInDb
+    @NotNullInDb
     public String field2nn;
 
-    @Nf3Short
-    @Nf3NotNull
+    @ShortLength
+    @NotNullInDb
     public String field3nn;
 
-    @Nf3Long
-    @Nf3NotNull
+    @LongLength
+    @NotNullInDb
     public String field4nn;
 
-    @Nf3ID
+    @ID
     public String fieldId;//must be not null
   }
 
@@ -120,9 +120,9 @@ public class SqlTypeUtilTest {
     public int field1;
     public Integer field2;
 
-    @Nf3Short
+    @ShortLength
     public int field3;
-    @Nf3Short
+    @ShortLength
     public Integer field4;
   }
 
@@ -146,11 +146,11 @@ public class SqlTypeUtilTest {
 
   @SuppressWarnings("unused")
   static class FieldDateSource {
-    @Nf3NotNull
+    @NotNullInDb
     public Date field1;
     public Date field2;
 
-    @Nf3DefaultNow
+    @DefaultNow
     public Date field3;
   }
 
@@ -188,7 +188,7 @@ public class SqlTypeUtilTest {
 
   @SuppressWarnings("unused")
   static class FieldEnumSource {
-    @Nf3NotNull
+    @NotNullInDb
     public Wow field1;
     public Wow field2;
   }

@@ -1,12 +1,12 @@
 package kz.greetgo.nf36.core;
 
-public interface Nf36Updater {
+public interface Updater {
 
   void setNf3TableName(String tableName);
 
   void setAuthorFieldNames(String nf3ModifiedBy, String nf6InsertedBy);
 
-  Nf36Updater setAuthor(Object author);
+  Updater setAuthor(Object author);
 
   void setIdFieldNames(String... idFieldNames);
 

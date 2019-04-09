@@ -1,13 +1,13 @@
 package kz.greetgo.db.nf36.gen;
 
-import kz.greetgo.nf36.core.Nf36HistorySelector;
-import kz.greetgo.nf36.core.Nf36Saver;
-import kz.greetgo.nf36.core.Nf36Updater;
-import kz.greetgo.nf36.core.Nf36Upserter;
-import kz.greetgo.nf36.core.Nf3CommitMethodName;
-import kz.greetgo.nf36.core.Nf3GenerateHistorySelector;
-import kz.greetgo.nf36.core.Nf3MoreMethodName;
-import kz.greetgo.nf36.core.Nf3SaveMethodName;
+import kz.greetgo.nf36.core.HistorySelector;
+import kz.greetgo.nf36.core.Saver;
+import kz.greetgo.nf36.core.Updater;
+import kz.greetgo.nf36.core.Upserter;
+import kz.greetgo.nf36.core.CommitMethodName;
+import kz.greetgo.nf36.core.GenerateHistorySelector;
+import kz.greetgo.nf36.core.DepricatedNf3MoreMethodName;
+import kz.greetgo.nf36.core.SaveMethodName;
 import kz.greetgo.nf36.core.SequenceNext;
 import kz.greetgo.nf36.errors.CannotBeNull;
 import kz.greetgo.nf36.model.Nf3Field;
@@ -236,7 +236,7 @@ public class JavaGenerator {
 
     String accessToEntityMethodName = firstToLow(nf3Table.source().getSimpleName());
 
-    Nf3SaveMethodName nf3SaveMethodName = nf3Table.source().getAnnotation(Nf3SaveMethodName.class);
+    SaveMethodName nf3SaveMethodName = nf3Table.source().getAnnotation(SaveMethodName.class);
 
     String saveMethodName = nf3SaveMethodName == null ? collector.saveMethodName() : nf3SaveMethodName.value();
 
@@ -314,7 +314,7 @@ public class JavaGenerator {
       return null;
     }
 
-    Nf3GenerateHistorySelector definition = nf3Table.source().getAnnotation(Nf3GenerateHistorySelector.class);
+    GenerateHistorySelector definition = nf3Table.source().getAnnotation(GenerateHistorySelector.class);
 
     if (definition == null) {
       return null;
@@ -415,11 +415,11 @@ public class JavaGenerator {
 
     String implFullName = resolveFullName(implPackageName, implClassName);
 
-    Nf3MoreMethodName nf3MoreMethodName = nf3Table.source().getAnnotation(Nf3MoreMethodName.class);
+    DepricatedNf3MoreMethodName depricatedNf3MoreMethodName = nf3Table.source().getAnnotation(DepricatedNf3MoreMethodName.class);
 
-    String moreMethodName = nf3MoreMethodName == null ? collector.moreMethodName() : nf3MoreMethodName.value();
+    String moreMethodName = depricatedNf3MoreMethodName == null ? collector.moreMethodName() : depricatedNf3MoreMethodName.value();
 
-    Nf3CommitMethodName nf3CommitMethodName = nf3Table.source().getAnnotation(Nf3CommitMethodName.class);
+    CommitMethodName nf3CommitMethodName = nf3Table.source().getAnnotation(CommitMethodName.class);
 
     String commitMethodName = nf3CommitMethodName == null ? collector.commitMethodName() : nf3CommitMethodName.value();
 
@@ -526,7 +526,7 @@ public class JavaGenerator {
 
     String implFullName = resolveFullName(implPackageName, implClassName);
 
-    Nf3CommitMethodName nf3CommitMethodName = nf3Table.source().getAnnotation(Nf3CommitMethodName.class);
+    CommitMethodName nf3CommitMethodName = nf3Table.source().getAnnotation(CommitMethodName.class);
 
     String commitMethodName = nf3CommitMethodName == null ? collector.commitMethodName() : nf3CommitMethodName.value();
 
@@ -851,7 +851,7 @@ public class JavaGenerator {
       .collect(toList());
 
     {
-      String historySelector = p.i(Nf36HistorySelector.class);
+      String historySelector = p.i(HistorySelector.class);
       p.ofs(1).prn("private final " + historySelector + " historySelector;").prn();
       p.ofs(1).prn("public " + info.implClassName() + "(" + historySelector + " historySelector) {").prn();
       p.ofs(2).prn("this.historySelector = historySelector;");
@@ -1065,7 +1065,7 @@ public class JavaGenerator {
   }
 
   private void printSaveImplConstructor(JavaFilePrinter p, SaveInfo info) {
-    String saverClassName = p.i(Nf36Saver.class.getName());
+    String saverClassName = p.i(Saver.class.getName());
 
     p.ofs(1).prn("private final " + saverClassName + " " + saverFieldName + ";");
     p.prn();
@@ -1098,7 +1098,7 @@ public class JavaGenerator {
   }
 
   private void printUpsertImplConstructor(JavaFilePrinter p, UpsertInfo info) {
-    String upserterClassName = p.i(Nf36Upserter.class.getName());
+    String upserterClassName = p.i(Upserter.class.getName());
 
     p.ofs(1).prn("private final " + upserterClassName + " " + upserterField + ";");
     p.prn();
@@ -1140,7 +1140,7 @@ public class JavaGenerator {
   }
 
   private void printUpdaterWhereImplConstructor(UpdateInfo info, JavaFilePrinter p) {
-    String nameNf36Updater = p.i(Nf36Updater.class.getName());
+    String nameNf36Updater = p.i(Updater.class.getName());
 
     p.ofs(1).prn("private final " + nameNf36Updater + " updater;").prn();
     p.ofs(1).prn("public " + info.implClassName() + "(" + nameNf36Updater + " updater) {");
@@ -1273,7 +1273,7 @@ public class JavaGenerator {
       + " implements " + p.i(interfaceFullClassName);
 
     {
-      String selectorClassName = p.i(Nf36HistorySelector.class);
+      String selectorClassName = p.i(HistorySelector.class);
 
       p.ofs(1).prn("protected " + (abstracting ? "abstract " : "")
         + selectorClassName + " " + createHistorySelectorMethodName + "()"
@@ -1400,7 +1400,7 @@ public class JavaGenerator {
   @SuppressWarnings("Duplicates")
   private void printCreateSaverMethod(JavaFilePrinter p) {
 
-    String saverClassName = p.i(Nf36Saver.class.getName());
+    String saverClassName = p.i(Saver.class.getName());
 
     p.ofs(1).prn("protected " + (abstracting ? "abstract " : "")
       + saverClassName + " " + saverCreateMethod + "()"
@@ -1419,7 +1419,7 @@ public class JavaGenerator {
 
   @SuppressWarnings("Duplicates")
   private void printCreateUpserterMethod(JavaFilePrinter p) {
-    String upserterClassName = p.i(Nf36Upserter.class.getName());
+    String upserterClassName = p.i(Upserter.class.getName());
 
     p.ofs(1).prn("protected " + (abstracting ? "abstract " : "")
       + upserterClassName + " " + upserterCreateMethod + "()"
@@ -1457,7 +1457,7 @@ public class JavaGenerator {
 
   @SuppressWarnings("Duplicates")
   private void printCreateUpdaterMethod(JavaFilePrinter p) {
-    String updaterClassName = p.i(Nf36Updater.class.getName());
+    String updaterClassName = p.i(Updater.class.getName());
 
     p.ofs(1).prn("protected " + (abstracting ? "abstract " : "")
       + updaterClassName + " " + updaterCreateMethod + "()"

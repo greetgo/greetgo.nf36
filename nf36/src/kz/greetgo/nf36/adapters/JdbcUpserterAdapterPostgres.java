@@ -9,11 +9,11 @@ import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.concat;
 
-class JdbcNf36UpserterAdapterPostgres extends JdbcNf36UpserterAbstractAdapter {
+class JdbcUpserterAdapterPostgres extends JdbcUpserterAbstractAdapter {
 
   @Override
-  protected JdbcNf36UpserterAbstractAdapter copyInstance() {
-    return new JdbcNf36UpserterAdapterPostgres();
+  protected JdbcUpserterAbstractAdapter copyInstance() {
+    return new JdbcUpserterAdapterPostgres();
   }
 
   protected void upsert(Connection con) throws Exception {

@@ -6,9 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.TYPE;
 
 @Documented
 @Target(FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Nf3NotNull {}
+public @interface ValueScale {
+  int value();
+}

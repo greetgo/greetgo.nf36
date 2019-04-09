@@ -10,4 +10,6 @@ import static java.lang.annotation.ElementType.FIELD;
 @Documented
 @Target(FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Nf3DefaultNow {}
+public @interface DefaultValue {
+  String value();
+}

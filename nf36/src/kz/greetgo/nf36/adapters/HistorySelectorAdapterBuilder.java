@@ -2,11 +2,11 @@ package kz.greetgo.nf36.adapters;
 
 import kz.greetgo.db.DbType;
 import kz.greetgo.db.Jdbc;
-import kz.greetgo.nf36.core.Nf36HistorySelector;
+import kz.greetgo.nf36.core.HistorySelector;
 import kz.greetgo.nf36.core.SqlLogAcceptor;
 
 public class HistorySelectorAdapterBuilder {
-  private JdbcNf36HistorySelectorAbstractAdapter adapter = null;
+  private JdbcHistorySelectorAbstractAdapter adapter = null;
   private SqlLogAcceptor logAcceptor = null;
   private Jdbc jdbc = null;
 
@@ -23,11 +23,11 @@ public class HistorySelectorAdapterBuilder {
   public HistorySelectorAdapterBuilder database(DbType dbType) {
     switch (dbType) {
       case Postgres:
-        adapter = new JdbcNf36HistorySelectorAdapterPostgres();
+        adapter = new JdbcHistorySelectorAdapterPostgres();
         return this;
 
       case Oracle:
-        adapter = new JdbcNf36HistorySelectorAdapterOracle();
+        adapter = new JdbcHistorySelectorAdapterOracle();
         return this;
 
       default:
@@ -42,7 +42,7 @@ public class HistorySelectorAdapterBuilder {
     return this;
   }
 
-  public Nf36HistorySelector build() {
+  public HistorySelector build() {
     if (adapter == null) {
       throw new RuntimeException("Please define database. Call method 'database'");
     }

@@ -2,7 +2,7 @@ package kz.greetgo.db.nf36.gen;
 
 import kz.greetgo.class_scanner.ClassScanner;
 import kz.greetgo.class_scanner.ClassScannerDef;
-import kz.greetgo.nf36.core.Nf3Entity;
+import kz.greetgo.nf36.core.Entity;
 import kz.greetgo.nf36.model.Nf3Field;
 import kz.greetgo.nf36.model.Nf3Table;
 
@@ -351,7 +351,7 @@ public class ModelCollector {
 
   public ModelCollector scanPackageOfClassRecursively(Class<?> classForPackage, boolean andSetSourceBasePackage) {
     for (Class<?> aClass : classScanner.scanPackage(classForPackage.getPackage().getName())) {
-      if (aClass.getAnnotation(Nf3Entity.class) != null) {
+      if (aClass.getAnnotation(Entity.class) != null) {
         try {
           register(aClass.getDeclaredConstructor().newInstance());
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {

@@ -1,6 +1,6 @@
 package kz.greetgo.db.nf36.gen;
 
-import kz.greetgo.nf36.core.Nf3Description;
+import kz.greetgo.nf36.core.Description;
 import kz.greetgo.nf36.model.Nf3Field;
 import kz.greetgo.nf36.model.Nf3Table;
 import kz.greetgo.nf36.utils.UtilsNf36;
@@ -54,7 +54,7 @@ class Nf3TableImpl implements Nf3Table {
 
   @Override
   public String commentQuotedForSql() {
-    Nf3Description d = definer.getClass().getAnnotation(Nf3Description.class);
+    Description d = definer.getClass().getAnnotation(Description.class);
     if (d == null) {
       throw new RuntimeException("No description for class " + definer.getClass().getSimpleName());
     }

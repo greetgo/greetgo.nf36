@@ -1,46 +1,46 @@
 package kz.greetgo.db.nf36.gen.structure;
 
-import kz.greetgo.nf36.core.Nf3Description;
-import kz.greetgo.nf36.core.Nf3GenerateHistorySelector;
-import kz.greetgo.nf36.core.Nf3ID;
-import kz.greetgo.nf36.core.Nf3NotNull;
-import kz.greetgo.nf36.core.Nf3ReferenceTo;
-import kz.greetgo.nf36.core.Nf3Text;
+import kz.greetgo.nf36.core.Description;
+import kz.greetgo.nf36.core.GenerateHistorySelector;
+import kz.greetgo.nf36.core.ID;
+import kz.greetgo.nf36.core.NotNullInDb;
+import kz.greetgo.nf36.core.ReferencesTo;
+import kz.greetgo.nf36.core.BigTextInDb;
 import kz.greetgo.db.nf36.gen.structure.inner.Chair;
 
-@Nf3Description("Это клиент")
+@Description("Это клиент")
 @SuppressWarnings("unused")
-@Nf3GenerateHistorySelector
+@GenerateHistorySelector
 public class Client {
-  @Nf3Description("Идентификатор клиента")
-  @Nf3ID(seqFrom = 10_000_000)
+  @Description("Идентификатор клиента")
+  @ID(seqFrom = 10_000_000)
   public long id;
 
-  @Nf3Description("Фамилия")
-  @Nf3NotNull
+  @Description("Фамилия")
+  @NotNullInDb
   public String surname;
 
-  @Nf3Description("Имя")
+  @Description("Имя")
   public String name;
 
-  @Nf3Description("Отчество")
+  @Description("Отчество")
   public String patronymic;
 
-  @Nf3Description("Длинное описание")
-  @Nf3Text
+  @Description("Длинное описание")
+  @BigTextInDb
   public String longDescription;
 
-  @Nf3Description("Ссылка на мой стул")
-  @Nf3ReferenceTo(Chair.class)
+  @Description("Ссылка на мой стул")
+  @ReferencesTo(Chair.class)
   public Long myChairId1;
 
-  @Nf3ReferenceTo(Chair.class)
+  @ReferencesTo(Chair.class)
   public String myChairId2;
 
-  @Nf3Description("Ссылка на его стул")
-  @Nf3ReferenceTo(Chair.class)
+  @Description("Ссылка на его стул")
+  @ReferencesTo(Chair.class)
   public Long hisChairLongId;
 
-  @Nf3ReferenceTo(Chair.class)
+  @ReferencesTo(Chair.class)
   public String hisChairStrId;
 }

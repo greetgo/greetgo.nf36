@@ -1,33 +1,33 @@
 package shared_model;
 
-import kz.greetgo.nf36.core.Nf3DefaultValue;
-import kz.greetgo.nf36.core.Nf3Description;
-import kz.greetgo.nf36.core.Nf3Entity;
-import kz.greetgo.nf36.core.Nf3ID;
-import kz.greetgo.nf36.core.Nf3Length;
+import kz.greetgo.nf36.core.DefaultValue;
+import kz.greetgo.nf36.core.Description;
+import kz.greetgo.nf36.core.Entity;
+import kz.greetgo.nf36.core.ID;
+import kz.greetgo.nf36.core.Length;
 
 import java.math.BigDecimal;
 
-@Nf3Entity
-@Nf3Description("person")
+@Entity
+@Description("person")
 @SuppressWarnings("unused")
 public class Person {
-  @Nf3ID
-  @Nf3Length(113)
-  @Nf3Description("id")
+  @ID
+  @Length(113)
+  @Description("id")
   public String id;
 
-  @Nf3Length(119)
-  @Nf3Description("fio")
-  @Nf3DefaultValue("Вселенское ' значение")
+  @Length(119)
+  @Description("fio")
+  @DefaultValue("Вселенское ' значение")
   public String fio;
 
-  @Nf3Description("blocked")
+  @Description("blocked")
   public boolean blocked = true;
 
-  @Nf3Description("amount")
+  @Description("amount")
   public BigDecimal amount;
 
-  @Nf3Description("amountRU")
+  @Description("amountRU")
   public BigDecimal amountRU;
 }

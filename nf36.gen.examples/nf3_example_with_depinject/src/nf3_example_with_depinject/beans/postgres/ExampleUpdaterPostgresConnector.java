@@ -3,7 +3,7 @@ package nf3_example_with_depinject.beans.postgres;
 import kz.greetgo.db.Jdbc;
 import kz.greetgo.depinject.core.Bean;
 import kz.greetgo.depinject.core.BeanGetter;
-import kz.greetgo.nf36.core.Nf36Updater;
+import kz.greetgo.nf36.core.Updater;
 import kz.greetgo.nf36.core.SqlLogAcceptor;
 import nf3_example_with_depinject.generated.impl.postgres.AbstractExampleUpdaterPostgres;
 import nf3_example_with_depinject.util.AuthorGetter;
@@ -23,7 +23,7 @@ public class ExampleUpdaterPostgresConnector extends AbstractExampleUpdaterPostg
   public BeanGetter<AuthorGetter> authorGetter;
 
   @Override
-  protected Nf36Updater createUpdater() {
+  protected Updater createUpdater() {
     return newNf36Builder()
         .updater()
         .database(dbTypeSource.get().currentDbType())

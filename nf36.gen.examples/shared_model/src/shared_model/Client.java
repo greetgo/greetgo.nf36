@@ -1,61 +1,61 @@
 package shared_model;
 
-import kz.greetgo.nf36.core.Nf3CommitMethodName;
-import kz.greetgo.nf36.core.Nf3Description;
-import kz.greetgo.nf36.core.Nf3Entity;
-import kz.greetgo.nf36.core.Nf3GenerateHistorySelector;
-import kz.greetgo.nf36.core.Nf3ID;
-import kz.greetgo.nf36.core.Nf3MoreMethodName;
-import kz.greetgo.nf36.core.Nf3NotNull;
-import kz.greetgo.nf36.core.Nf3ReferenceTo;
-import kz.greetgo.nf36.core.Nf3SaveMethodName;
-import kz.greetgo.nf36.core.Nf3Text;
+import kz.greetgo.nf36.core.CommitMethodName;
+import kz.greetgo.nf36.core.Description;
+import kz.greetgo.nf36.core.Entity;
+import kz.greetgo.nf36.core.GenerateHistorySelector;
+import kz.greetgo.nf36.core.ID;
+import kz.greetgo.nf36.core.DepricatedNf3MoreMethodName;
+import kz.greetgo.nf36.core.NotNullInDb;
+import kz.greetgo.nf36.core.ReferencesTo;
+import kz.greetgo.nf36.core.SaveMethodName;
+import kz.greetgo.nf36.core.BigTextInDb;
 import shared_model.inner.Chair;
 import shared_model.inner.Charm;
 
-@Nf3Entity
-@Nf3Description("Это клиент")
-@Nf3CommitMethodName("commitAll")
-@Nf3MoreMethodName("moreAnother")
-@Nf3SaveMethodName("saveAll")
+@Entity
+@Description("Это клиент")
+@CommitMethodName("commitAll")
+@DepricatedNf3MoreMethodName("moreAnother")
+@SaveMethodName("saveAll")
 @SuppressWarnings("unused")
-@Nf3GenerateHistorySelector(atMethodName = "atMoment")
+@GenerateHistorySelector(atMethodName = "atMoment")
 public class Client {
-  @Nf3Description("Идентификатор клиента")
-  @Nf3ID(seqFrom = 10_000_000)
+  @Description("Идентификатор клиента")
+  @ID(seqFrom = 10_000_000)
   public long id;
 
-  @Nf3Description("Фамилия")
-  @Nf3NotNull
+  @Description("Фамилия")
+  @NotNullInDb
   public String surname;
 
-  @Nf3Description("Имя")
+  @Description("Имя")
   public String name;
 
-  @Nf3Description("Отчество")
+  @Description("Отчество")
   public String patronymic;
 
-  @Nf3ReferenceTo(Charm.class)
-  @Nf3Description("hi")
+  @ReferencesTo(Charm.class)
+  @Description("hi")
   public String charmId;
 
-  @Nf3Description("Длинное описание")
-  @Nf3Text
+  @Description("Длинное описание")
+  @BigTextInDb
   public String longDescription;
 
-  @Nf3Description("Ссылка на мой стул")
-  @Nf3ReferenceTo(value = Chair.class, nextPart = "myChairId2")
+  @Description("Ссылка на мой стул")
+  @ReferencesTo(value = Chair.class, nextPart = "myChairId2")
   public Long myChairId1;
 
-  @Nf3ReferenceTo(Chair.class)
-  @Nf3Description("hi")
+  @ReferencesTo(Chair.class)
+  @Description("hi")
   public String myChairId2;
 
-  @Nf3Description("Ссылка на его стул")
-  @Nf3ReferenceTo(value = Chair.class, nextPart = "hisChairStrId")
+  @Description("Ссылка на его стул")
+  @ReferencesTo(value = Chair.class, nextPart = "hisChairStrId")
   public Long hisChairLongId;
 
-  @Nf3ReferenceTo(Chair.class)
-  @Nf3Description("hi")
+  @ReferencesTo(Chair.class)
+  @Description("hi")
   public String hisChairStrId;
 }

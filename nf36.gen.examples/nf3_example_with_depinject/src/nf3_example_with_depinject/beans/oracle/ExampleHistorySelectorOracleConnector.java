@@ -3,7 +3,7 @@ package nf3_example_with_depinject.beans.oracle;
 import kz.greetgo.db.Jdbc;
 import kz.greetgo.depinject.core.Bean;
 import kz.greetgo.depinject.core.BeanGetter;
-import kz.greetgo.nf36.core.Nf36HistorySelector;
+import kz.greetgo.nf36.core.HistorySelector;
 import kz.greetgo.nf36.core.SqlLogAcceptor;
 import nf3_example_with_depinject.generated.impl.oracle.AbstractExampleHistorySelectorOracle;
 import nf3_example_with_depinject.util.DbTypeSource;
@@ -20,7 +20,7 @@ public class ExampleHistorySelectorOracleConnector extends AbstractExampleHistor
   public BeanGetter<SqlLogAcceptor> logAcceptor;
 
   @Override
-  protected Nf36HistorySelector createHistorySelector() {
+  protected HistorySelector createHistorySelector() {
     return newNf36Builder()
         .historySelector()
         .setLogAcceptor(logAcceptor.get())

@@ -1,9 +1,9 @@
 package kz.greetgo.db.nf36.gen;
 
-import kz.greetgo.nf36.core.Nf3Description;
-import kz.greetgo.nf36.core.Nf3ID;
-import kz.greetgo.nf36.core.Nf3Ignore;
-import kz.greetgo.nf36.core.Nf3ReferenceTo;
+import kz.greetgo.nf36.core.Description;
+import kz.greetgo.nf36.core.ID;
+import kz.greetgo.nf36.core.Ignore;
+import kz.greetgo.nf36.core.ReferencesTo;
 import kz.greetgo.nf36.model.DbType;
 import kz.greetgo.nf36.model.Nf3Field;
 import kz.greetgo.nf36.model.Nf3Table;
@@ -17,19 +17,19 @@ class Nf3FieldImpl implements Nf3Field {
   private final Nf3Table nf3Table;
   private final Object definer;
   private final Field source;
-  private final Nf3ID nf3ID;
+  private final ID ID;
   private final ModelCollector collector;
 
   public Nf3FieldImpl(Nf3Table nf3Table, Object definer, Field source, ModelCollector collector) {
     this.nf3Table = nf3Table;
     this.definer = definer;
     this.source = source;
-    nf3ID = source.getAnnotation(Nf3ID.class);
+    ID = source.getAnnotation(ID.class);
     this.collector = collector;
   }
 
   public boolean notIgnoring() {
-    return source.getAnnotation(Nf3Ignore.class) == null;
+    return source.getAnnotation(Ignore.class) == null;
   }
 
   @Override
@@ -44,12 +44,12 @@ class Nf3FieldImpl implements Nf3Field {
 
   @Override
   public boolean isId() {
-    return nf3ID != null;
+    return ID != null;
   }
 
   @Override
   public int idOrder() {
-    return nf3ID == null ? 0 : nf3ID.order();
+    return ID == null ? 0 : ID.order();
   }
 
   @Override
@@ -75,13 +75,13 @@ class Nf3FieldImpl implements Nf3Field {
   @Override
   public Class<?> referenceToClass() {
     {
-      Nf3ReferenceTo a = source.getAnnotation(Nf3ReferenceTo.class);
+      ReferencesTo a = source.getAnnotation(ReferencesTo.class);
       if (a != null) {
         return a.value();
       }
     }
     {
-      Nf3ID a = source.getAnnotation(Nf3ID.class);
+      ID a = source.getAnnotation(ID.class);
       if (a != null && a.ref() != Object.class) {
         return a.ref();
       }
@@ -92,13 +92,13 @@ class Nf3FieldImpl implements Nf3Field {
   @Override
   public String nextPart() {
     {
-      Nf3ReferenceTo a = source.getAnnotation(Nf3ReferenceTo.class);
+      ReferencesTo a = source.getAnnotation(ReferencesTo.class);
       if (a != null && a.nextPart().length() > 0) {
         return a.nextPart();
       }
     }
     {
-      Nf3ID a = source.getAnnotation(Nf3ID.class);
+      ID a = source.getAnnotation(ID.class);
       if (a != null && a.nextPart().length() > 0) {
         return a.nextPart();
       }
@@ -157,7 +157,7 @@ class Nf3FieldImpl implements Nf3Field {
 
   @Override
   public String commentQuotedForSql() {
-    Nf3Description d = source.getAnnotation(Nf3Description.class);
+    Description d = source.getAnnotation(Description.class);
     if (d == null) {
       throw new RuntimeException("No description for field " + definer.getClass().getSimpleName()
           + "." + source.getName());
@@ -167,7 +167,7 @@ class Nf3FieldImpl implements Nf3Field {
 
   @Override
   public Sequence sequence() {
-    if (nf3ID == null) {
+    if (ID == null) {
       return null;
     }
     if (!dbType().sequential()) {
@@ -176,6 +176,6 @@ class Nf3FieldImpl implements Nf3Field {
 
     String sequenceName = collector.sequencePrefix() + nf3Table.tableName() + "_" + dbName();
 
-    return new Sequence(sequenceName, nf3ID.seqFrom());
+    return new Sequence(sequenceName, ID.seqFrom());
   }
 }

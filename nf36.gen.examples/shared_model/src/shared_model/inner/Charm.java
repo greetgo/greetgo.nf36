@@ -1,17 +1,17 @@
 package shared_model.inner;
 
-import kz.greetgo.nf36.core.Nf3Description;
-import kz.greetgo.nf36.core.Nf3Entity;
-import kz.greetgo.nf36.core.Nf3ID;
+import kz.greetgo.nf36.core.Description;
+import kz.greetgo.nf36.core.Entity;
+import kz.greetgo.nf36.core.ID;
 
-@Nf3Entity
-@Nf3Description("Характер")
+@Entity
+@Description("Характер")
 @SuppressWarnings("unused")
 public class Charm {
-  @Nf3Description("hi")
-  @Nf3ID
+  @Description("hi")
+  @ID
   public String id;
 
-  @Nf3Description("hi")
+  @Description("hi")
   public String name;
 }

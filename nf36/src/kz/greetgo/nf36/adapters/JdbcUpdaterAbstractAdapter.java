@@ -2,7 +2,7 @@ package kz.greetgo.nf36.adapters;
 
 import kz.greetgo.db.ConnectionCallback;
 import kz.greetgo.db.Jdbc;
-import kz.greetgo.nf36.core.Nf36Updater;
+import kz.greetgo.nf36.core.Updater;
 import kz.greetgo.nf36.core.SqlLogAcceptor;
 import kz.greetgo.nf36.model.SqlLog;
 import kz.greetgo.nf36.utils.SqlConvertUtil;
@@ -17,7 +17,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.joining;
 
-public abstract class JdbcNf36UpdaterAbstractAdapter implements Nf36Updater, ConnectionCallback<Void> {
+public abstract class JdbcUpdaterAbstractAdapter implements Updater, ConnectionCallback<Void> {
   Jdbc jdbc;
   SqlLogAcceptor logAcceptor = null;
   protected String nf3TableName;
@@ -38,7 +38,7 @@ public abstract class JdbcNf36UpdaterAbstractAdapter implements Nf36Updater, Con
   }
 
   @Override
-  public Nf36Updater setAuthor(Object author) {
+  public Updater setAuthor(Object author) {
     this.author = author;
     return this;
   }

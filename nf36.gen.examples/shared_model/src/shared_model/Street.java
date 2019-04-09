@@ -1,28 +1,28 @@
 package shared_model;
 
-import kz.greetgo.nf36.core.Nf3Description;
-import kz.greetgo.nf36.core.Nf3Entity;
-import kz.greetgo.nf36.core.Nf3ID;
-import kz.greetgo.nf36.core.Nf3Ignore;
-import kz.greetgo.nf36.core.Nf3NotNull;
+import kz.greetgo.nf36.core.Description;
+import kz.greetgo.nf36.core.Entity;
+import kz.greetgo.nf36.core.ID;
+import kz.greetgo.nf36.core.Ignore;
+import kz.greetgo.nf36.core.NotNullInDb;
 
-@Nf3Entity
-@Nf3Description("Справочник улиц")
+@Entity
+@Description("Справочник улиц")
 @SuppressWarnings("unused")
 public class Street {
 
-  @Nf3Description("Идентификатор улицы")
-  @Nf3ID
+  @Description("Идентификатор улицы")
+  @ID
   public long id;
 
-  @Nf3Description("Тип улицы")
-  @Nf3NotNull
+  @Description("Тип улицы")
+  @NotNullInDb
   public StreetType type = StreetType.STREET;
 
-  @Nf3Description("Имя")
-  @Nf3NotNull
+  @Description("Имя")
+  @NotNullInDb
   public String name;
 
-  @Nf3Ignore
+  @Ignore
   public String createdBy;
 }

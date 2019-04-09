@@ -3,7 +3,7 @@ package kz.greetgo.nf36.adapters;
 import kz.greetgo.db.ConnectionCallback;
 import kz.greetgo.db.Jdbc;
 import kz.greetgo.nf36.bridges.ClassAccessor;
-import kz.greetgo.nf36.core.Nf36HistorySelector;
+import kz.greetgo.nf36.core.HistorySelector;
 import kz.greetgo.nf36.core.SqlLogAcceptor;
 import kz.greetgo.nf36.model.SqlLog;
 import kz.greetgo.nf36.utils.UtilsNf36;
@@ -29,7 +29,7 @@ import static kz.greetgo.nf36.bridges.ClassAccessorStorage.classAccessorStorage;
 import static kz.greetgo.nf36.utils.SqlConvertUtil.forSql;
 import static kz.greetgo.nf36.utils.SqlConvertUtil.fromSql;
 
-abstract class JdbcNf36HistorySelectorAbstractAdapter implements Nf36HistorySelector, ConnectionCallback<Boolean> {
+abstract class JdbcHistorySelectorAbstractAdapter implements HistorySelector, ConnectionCallback<Boolean> {
   protected boolean selectAuthor = false;
   protected Jdbc jdbc;
   protected SqlLogAcceptor logAcceptor = null;
@@ -50,7 +50,7 @@ abstract class JdbcNf36HistorySelectorAbstractAdapter implements Nf36HistorySele
   }
 
   @Override
-  public Nf36HistorySelector setTimeFieldName(String timeFieldName) {
+  public HistorySelector setTimeFieldName(String timeFieldName) {
     this.ts = timeFieldName;
     return this;
   }
@@ -58,7 +58,7 @@ abstract class JdbcNf36HistorySelectorAbstractAdapter implements Nf36HistorySele
   protected String insertedAt;
 
   @Override
-  public Nf36HistorySelector setInsertedAtFieldName(String insertedAtFieldName) {
+  public HistorySelector setInsertedAtFieldName(String insertedAtFieldName) {
     this.insertedAt = insertedAtFieldName;
     return this;
   }
@@ -66,7 +66,7 @@ abstract class JdbcNf36HistorySelectorAbstractAdapter implements Nf36HistorySele
   protected String nf3TableName;
 
   @Override
-  public Nf36HistorySelector setNf3TableName(String nf3TableName) {
+  public HistorySelector setNf3TableName(String nf3TableName) {
     this.nf3TableName = nf3TableName;
     return this;
   }
@@ -134,7 +134,7 @@ abstract class JdbcNf36HistorySelectorAbstractAdapter implements Nf36HistorySele
   protected final List<EntityField> fieldList = new ArrayList<>();
 
   @Override
-  public Nf36HistorySelector field(String nf6TableName, String dbFieldName, String authorFieldName) {
+  public HistorySelector field(String nf6TableName, String dbFieldName, String authorFieldName) {
     fieldList.add(new EntityField(nf6TableName, dbFieldName, authorFieldName));
     return this;
   }
@@ -142,7 +142,7 @@ abstract class JdbcNf36HistorySelectorAbstractAdapter implements Nf36HistorySele
   protected final Map<String, String> fieldAliasMap = new HashMap<>();
 
   @Override
-  public Nf36HistorySelector addFieldAlias(String dbFieldName, String aliasName) {
+  public HistorySelector addFieldAlias(String dbFieldName, String aliasName) {
     fieldAliasMap.put(dbFieldName, aliasName);
     return this;
   }
@@ -183,13 +183,13 @@ abstract class JdbcNf36HistorySelectorAbstractAdapter implements Nf36HistorySele
   protected final List<IdField> idFieldList = new ArrayList<>();
 
   @Override
-  public Nf36HistorySelector addId(String idName) {
+  public HistorySelector addId(String idName) {
     idFieldList.add(new IdField(idName));
     return this;
   }
 
   @Override
-  public Nf36HistorySelector addIdAlias(String idName, String idAlias) {
+  public HistorySelector addIdAlias(String idName, String idAlias) {
     idAliasMap.put(idName, idAlias);
     return this;
   }
@@ -197,7 +197,7 @@ abstract class JdbcNf36HistorySelectorAbstractAdapter implements Nf36HistorySele
   protected Date at = null;
 
   @Override
-  public Nf36HistorySelector at(Date date) {
+  public HistorySelector at(Date date) {
     at = date;
     return this;
   }
@@ -205,7 +205,7 @@ abstract class JdbcNf36HistorySelectorAbstractAdapter implements Nf36HistorySele
   private final List<Consumer<Object>> onAbsentConsumers = new ArrayList<>();
 
   @Override
-  public Nf36HistorySelector onAbsent(Consumer<Object> destinationObjectConsumer) {
+  public HistorySelector onAbsent(Consumer<Object> destinationObjectConsumer) {
     onAbsentConsumers.add(destinationObjectConsumer);
     return this;
   }

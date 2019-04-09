@@ -10,6 +10,6 @@ import static java.lang.annotation.ElementType.TYPE;
 @Documented
 @Target(TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Nf3SaveMethodName {
+public @interface SaveMethodName {
   String value();
 }

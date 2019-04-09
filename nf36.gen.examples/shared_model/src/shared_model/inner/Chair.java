@@ -1,28 +1,28 @@
 package shared_model.inner;
 
-import kz.greetgo.nf36.core.Nf3Description;
-import kz.greetgo.nf36.core.Nf3Entity;
-import kz.greetgo.nf36.core.Nf3GenerateHistorySelector;
-import kz.greetgo.nf36.core.Nf3ID;
-import kz.greetgo.nf36.core.Nf3Text;
+import kz.greetgo.nf36.core.Description;
+import kz.greetgo.nf36.core.Entity;
+import kz.greetgo.nf36.core.GenerateHistorySelector;
+import kz.greetgo.nf36.core.ID;
+import kz.greetgo.nf36.core.BigTextInDb;
 
-@Nf3Entity
-@Nf3Description("Это стул ' и апостроф")
-@Nf3GenerateHistorySelector(toSuffix = "Into")
+@Entity
+@Description("Это стул ' и апостроф")
+@GenerateHistorySelector(toSuffix = "Into")
 @SuppressWarnings("unused")
 public class Chair {
-  @Nf3ID(seqFrom = 10_000_000)
-  @Nf3Description("Первый идентификатор стула")
+  @ID(seqFrom = 10_000_000)
+  @Description("Первый идентификатор стула")
   public long id1;
 
-  @Nf3ID(order = 2)
-  @Nf3Description("Второй идентификатор стула")
+  @ID(order = 2)
+  @Description("Второй идентификатор стула")
   public String id2;
 
-  @Nf3Description("Имя стула")
+  @Description("Имя стула")
   public String name = "Мой стул";
 
-  @Nf3Text
-  @Nf3Description("Описание стула")
+  @BigTextInDb
+  @Description("Описание стула")
   public String description = "Длинное описание стула";
 }

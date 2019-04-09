@@ -1,7 +1,7 @@
 package kz.greetgo.nf36.bridges;
 
-import kz.greetgo.nf36.core.Nf36Saver;
-import kz.greetgo.nf36.core.Nf36Upserter;
+import kz.greetgo.nf36.core.Saver;
+import kz.greetgo.nf36.core.Upserter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,27 +10,27 @@ import java.util.function.Predicate;
 
 import static kz.greetgo.nf36.bridges.ClassAccessorStorage.classAccessorStorage;
 
-public class SaverUpserterBridge implements Nf36Saver {
-  private final Nf36Upserter upserter;
+public class SaverUpserterBridge implements Saver {
+  private final Upserter upserter;
 
-  public SaverUpserterBridge(Nf36Upserter upserter) {
+  public SaverUpserterBridge(Upserter upserter) {
     this.upserter = upserter;
   }
 
   @Override
-  public Nf36Saver setNf3TableName(String nf3TableName) {
+  public Saver setNf3TableName(String nf3TableName) {
     upserter.setNf3TableName(nf3TableName);
     return this;
   }
 
   @Override
-  public Nf36Saver setTimeFieldName(String timeFieldName) {
+  public Saver setTimeFieldName(String timeFieldName) {
     upserter.setTimeFieldName(timeFieldName);
     return this;
   }
 
   @Override
-  public Nf36Saver setAuthorFieldNames(String nf3CreatedBy, String nf3ModifiedBy, String nf6InsertedBy) {
+  public Saver setAuthorFieldNames(String nf3CreatedBy, String nf3ModifiedBy, String nf6InsertedBy) {
     upserter.setAuthorFieldNames(nf3CreatedBy, nf3ModifiedBy, nf6InsertedBy);
     return this;
   }
@@ -38,7 +38,7 @@ public class SaverUpserterBridge implements Nf36Saver {
   private final List<IdField> idFieldList = new ArrayList<>();
 
   @Override
-  public Nf36Saver addIdName(String idName) {
+  public Saver addIdName(String idName) {
     idFieldList.add(new IdField(idName));
     return this;
   }
@@ -46,19 +46,19 @@ public class SaverUpserterBridge implements Nf36Saver {
   private final List<DataField> dataFieldList = new ArrayList<>();
 
   @Override
-  public Nf36Saver addFieldName(String nf6TableName, String fieldName) {
+  public Saver addFieldName(String nf6TableName, String fieldName) {
     dataFieldList.add(new DataField(nf6TableName, fieldName));
     return this;
   }
 
   @Override
-  public Nf36Saver putUpdateToNow(String timestampFieldName) {
+  public Saver putUpdateToNow(String timestampFieldName) {
     upserter.putUpdateToNow(timestampFieldName);
     return this;
   }
 
   @Override
-  public Nf36Saver setAuthor(Object author) {
+  public Saver setAuthor(Object author) {
     upserter.setAuthor(author);
     return this;
   }
@@ -66,7 +66,7 @@ public class SaverUpserterBridge implements Nf36Saver {
   private final PresetValues presetValues = new PresetValues();
 
   @Override
-  public Nf36Saver presetValue(String fieldName, Object value) {
+  public Saver presetValue(String fieldName, Object value) {
     presetValues.presetValue(fieldName, value);
     return this;
   }
@@ -74,7 +74,7 @@ public class SaverUpserterBridge implements Nf36Saver {
   private final SkipList skipList = new SkipList();
 
   @Override
-  public Nf36Saver addSkipIf(String fieldName, Predicate<?> predicate) {
+  public Saver addSkipIf(String fieldName, Predicate<?> predicate) {
     skipList.addSkipIf(fieldName, predicate);
     return this;
   }
@@ -82,7 +82,7 @@ public class SaverUpserterBridge implements Nf36Saver {
   private final AliasMapper aliasMapper = new AliasMapper();
 
   @Override
-  public Nf36Saver addAlias(String fieldName, String alias) {
+  public Saver addAlias(String fieldName, String alias) {
     aliasMapper.addAlias(fieldName, alias);
     return this;
   }

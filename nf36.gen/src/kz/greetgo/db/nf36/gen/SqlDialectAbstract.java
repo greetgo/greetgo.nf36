@@ -1,7 +1,7 @@
 package kz.greetgo.db.nf36.gen;
 
-import kz.greetgo.nf36.core.Nf3DefaultNow;
-import kz.greetgo.nf36.core.Nf3DefaultValue;
+import kz.greetgo.nf36.core.DefaultNow;
+import kz.greetgo.nf36.core.DefaultValue;
 import kz.greetgo.nf36.errors.ConflictError;
 import kz.greetgo.nf36.model.DbType;
 import kz.greetgo.nf36.model.Sequence;
@@ -15,8 +15,8 @@ public abstract class SqlDialectAbstract implements SqlDialect {
   public String createFieldDefinition(DbType dbType, String name, Field field, Object definer) throws Exception {
     String type = extractType(dbType);
 
-    Nf3DefaultValue aDefStrValue = field.getAnnotation(Nf3DefaultValue.class);
-    Nf3DefaultNow aDefNow = field.getAnnotation(Nf3DefaultNow.class);
+    DefaultValue aDefStrValue = field.getAnnotation(DefaultValue.class);
+    DefaultNow aDefNow = field.getAnnotation(DefaultNow.class);
 
     if (aDefNow != null && aDefStrValue != null) {
       throw new ConflictError(aDefNow, aDefStrValue);
@@ -29,11 +29,11 @@ public abstract class SqlDialectAbstract implements SqlDialect {
 
     if (field.getType() == boolean.class) {
       if (aDefStrValue != null) {
-        throw new RuntimeException("@" + Nf3DefaultValue.class.getSimpleName()
+        throw new RuntimeException("@" + DefaultValue.class.getSimpleName()
             + " is incompatible with boolean");
       }
       if (aDefNow != null) {
-        throw new RuntimeException("@" + Nf3DefaultNow.class.getSimpleName()
+        throw new RuntimeException("@" + DefaultNow.class.getSimpleName()
             + " is incompatible with boolean");
       }
       boolean defaultValue = (boolean) field.get(definer);

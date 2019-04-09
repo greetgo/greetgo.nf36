@@ -1,15 +1,12 @@
 package kz.greetgo.nf36.bridges;
 
-import kz.greetgo.nf36.core.Nf36Saver;
-import kz.greetgo.nf36.core.Nf36Upserter;
-import kz.greetgo.nf36.core.SequenceNext;
-
-import java.util.function.Supplier;
+import kz.greetgo.nf36.core.Saver;
+import kz.greetgo.nf36.core.Upserter;
 
 public class SaverBuilder {
-  private Nf36Upserter upserter = null;
+  private Upserter upserter = null;
 
-  public SaverBuilder setUpserter(Nf36Upserter upserter) {
+  public SaverBuilder setUpserter(Upserter upserter) {
     this.upserter = upserter;
     return this;
   }
@@ -26,7 +23,7 @@ public class SaverBuilder {
 
   private boolean built = false;
 
-  public Nf36Saver build() {
+  public Saver build() {
     check();
     built = true;
     return new SaverUpserterBridge(upserter);

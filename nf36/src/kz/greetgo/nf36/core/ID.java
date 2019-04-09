@@ -5,13 +5,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.ElementType.FIELD;
 
 @Documented
-@Target(TYPE)
+@Target(FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Nf3GenerateHistorySelector {
-  String atMethodName() default "at";
+public @interface ID {
+  long seqFrom() default 1;
 
-  String toSuffix() default "To";
+  Class<?> ref() default Object.class;
+
+  String nextPart() default "";
+
+  int order() default 1;
 }

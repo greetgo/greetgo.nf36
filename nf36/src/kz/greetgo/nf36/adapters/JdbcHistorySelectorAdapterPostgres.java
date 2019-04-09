@@ -1,6 +1,6 @@
 package kz.greetgo.nf36.adapters;
 
-class JdbcNf36HistorySelectorAdapterPostgres extends JdbcNf36HistorySelectorAbstractAdapter {
+class JdbcHistorySelectorAdapterPostgres extends JdbcHistorySelectorAbstractAdapter {
   @Override
   protected String timestampParameter() {
     return "?::timestamp";

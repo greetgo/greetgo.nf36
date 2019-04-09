@@ -2,7 +2,7 @@ package kz.greetgo.nf36.adapters;
 
 import kz.greetgo.db.ConnectionCallback;
 import kz.greetgo.db.Jdbc;
-import kz.greetgo.nf36.core.Nf36Upserter;
+import kz.greetgo.nf36.core.Upserter;
 import kz.greetgo.nf36.core.SqlLogAcceptor;
 import kz.greetgo.nf36.model.SqlLog;
 import kz.greetgo.nf36.utils.SqlConvertUtil;
@@ -25,7 +25,7 @@ import static java.util.Collections.unmodifiableList;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Stream.concat;
 
-abstract class JdbcNf36UpserterAbstractAdapter implements Nf36Upserter, ConnectionCallback<Void> {
+abstract class JdbcUpserterAbstractAdapter implements Upserter, ConnectionCallback<Void> {
   Jdbc jdbc;
   SqlLogAcceptor logAcceptor = null;
   protected String nf3TableName;
@@ -38,13 +38,13 @@ abstract class JdbcNf36UpserterAbstractAdapter implements Nf36Upserter, Connecti
   protected final Map<String, Object> fieldValueMap = new HashMap<>();
   protected final Map<String, Object> nf6ValueMap = new HashMap<>();
   protected final List<String> toNowFieldList = new ArrayList<>();
-  protected JdbcNf36UpserterAbstractAdapter parent = null;
+  protected JdbcUpserterAbstractAdapter parent = null;
 
-  protected abstract JdbcNf36UpserterAbstractAdapter copyInstance();
+  protected abstract JdbcUpserterAbstractAdapter copyInstance();
 
   @Override
-  public Nf36Upserter more() {
-    JdbcNf36UpserterAbstractAdapter ret = copyInstance();
+  public Upserter more() {
+    JdbcUpserterAbstractAdapter ret = copyInstance();
     ret.jdbc = jdbc;
     ret.logAcceptor = logAcceptor;
     ret.nf3TableName = nf3TableName;
@@ -58,7 +58,7 @@ abstract class JdbcNf36UpserterAbstractAdapter implements Nf36Upserter, Connecti
   }
 
   @Override
-  public JdbcNf36UpserterAbstractAdapter setAuthor(Object author) {
+  public JdbcUpserterAbstractAdapter setAuthor(Object author) {
     this.author = author;
     return this;
   }

@@ -1,13 +1,13 @@
 package kz.greetgo.db.nf36.gen;
 
-import kz.greetgo.nf36.core.Nf3ID;
-import kz.greetgo.nf36.core.Nf3Length;
-import kz.greetgo.nf36.core.Nf3Long;
-import kz.greetgo.nf36.core.Nf3NotNull;
-import kz.greetgo.nf36.core.Nf3ReferenceTo;
-import kz.greetgo.nf36.core.Nf3Scale;
-import kz.greetgo.nf36.core.Nf3Short;
-import kz.greetgo.nf36.core.Nf3Text;
+import kz.greetgo.nf36.core.ID;
+import kz.greetgo.nf36.core.Length;
+import kz.greetgo.nf36.core.LongLength;
+import kz.greetgo.nf36.core.NotNullInDb;
+import kz.greetgo.nf36.core.ReferencesTo;
+import kz.greetgo.nf36.core.ValueScale;
+import kz.greetgo.nf36.core.ShortLength;
+import kz.greetgo.nf36.core.BigTextInDb;
 import kz.greetgo.nf36.errors.ConflictError;
 import kz.greetgo.nf36.model.DbType;
 import kz.greetgo.nf36.model.SqlType;
@@ -60,18 +60,18 @@ public class SqlTypeUtil {
 
   public static DbType extractDbType(Field field, ModelCollector collector) {
     if (String.class.equals(field.getType())) {
-      boolean idOrReference = field.getAnnotation(Nf3ID.class) != null
-          || field.getAnnotation(Nf3ReferenceTo.class) != null;
+      boolean idOrReference = field.getAnnotation(ID.class) != null
+          || field.getAnnotation(ReferencesTo.class) != null;
 
-      boolean nullable = field.getAnnotation(Nf3ID.class) == null && field.getAnnotation(Nf3NotNull.class) == null;
+      boolean nullable = field.getAnnotation(ID.class) == null && field.getAnnotation(NotNullInDb.class) == null;
 
       int len = idOrReference ? collector.idLength : collector.defaultLength;
 
-      Nf3Short aShort = field.getAnnotation(Nf3Short.class);
+      ShortLength aShort = field.getAnnotation(ShortLength.class);
       if (aShort != null) {
         len = collector.shortLength;
       }
-      Nf3Long aLong = field.getAnnotation(Nf3Long.class);
+      LongLength aLong = field.getAnnotation(LongLength.class);
       if (aLong != null) {
         len = collector.longLength;
       }
@@ -80,7 +80,7 @@ public class SqlTypeUtil {
 
       Object prev = aShort != null ? aShort : aLong;
 
-      Nf3Length aLength = field.getAnnotation(Nf3Length.class);
+      Length aLength = field.getAnnotation(Length.class);
       if (aLength != null) {
         len = aLength.value();
       }
@@ -89,7 +89,7 @@ public class SqlTypeUtil {
 
       prev = prev != null ? prev : aLength;
 
-      Nf3Text aText = field.getAnnotation(Nf3Text.class);
+      BigTextInDb aText = field.getAnnotation(BigTextInDb.class);
       if (prev != null && aText != null) { throw new ConflictError(prev, aText); }
 
       if (aText != null) {
@@ -119,13 +119,13 @@ public class SqlTypeUtil {
     }
 
     if (Date.class.equals(field.getType())) {
-      boolean nullable = field.getAnnotation(Nf3NotNull.class) == null;
+      boolean nullable = field.getAnnotation(NotNullInDb.class) == null;
       return new DbTypeImpl(SqlType.TIMESTAMP, 0, nullable, false);
     }
 
     if (Enum.class.isAssignableFrom(field.getType())) {
       int len = 0;
-      Nf3Length aLength = field.getAnnotation(Nf3Length.class);
+      Length aLength = field.getAnnotation(Length.class);
       if (aLength != null) {
         len = aLength.value();
       }
@@ -135,23 +135,23 @@ public class SqlTypeUtil {
         }
         len = collector.enumLength;
       }
-      boolean nullable = field.getAnnotation(Nf3NotNull.class) == null;
+      boolean nullable = field.getAnnotation(NotNullInDb.class) == null;
       return new DbTypeImpl(SqlType.VARCHAR, len, nullable, false);
     }
 
     if (BigDecimal.class.equals(field.getType())) {
       int len = 19;
-      Nf3Length aLength = field.getAnnotation(Nf3Length.class);
+      Length aLength = field.getAnnotation(Length.class);
       if (aLength != null) {
         len = aLength.value();
       }
       int scale = 4;
-      Nf3Scale aScale = field.getAnnotation(Nf3Scale.class);
+      ValueScale aScale = field.getAnnotation(ValueScale.class);
       if (aLength != null) {
         scale = aScale.value();
       }
 
-      boolean nullable = field.getAnnotation(Nf3NotNull.class) == null;
+      boolean nullable = field.getAnnotation(NotNullInDb.class) == null;
 
       DbTypeImpl ret = new DbTypeImpl(SqlType.DECIMAL, len, nullable, false);
       ret.scale = scale;
@@ -162,6 +162,6 @@ public class SqlTypeUtil {
   }
 
   private static int intLen(Field field) {
-    return field.getAnnotation(Nf3Short.class) == null ? 4 : 8;
+    return field.getAnnotation(ShortLength.class) == null ? 4 : 8;
   }
 }

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-class JdbcNf36UpdaterAdapterPostgres extends JdbcNf36UpdaterAbstractAdapter {
+class JdbcUpdaterAdapterPostgres extends JdbcUpdaterAbstractAdapter {
   @Override
   protected List<IdValues> updateNf3(Connection con) throws Exception {
 

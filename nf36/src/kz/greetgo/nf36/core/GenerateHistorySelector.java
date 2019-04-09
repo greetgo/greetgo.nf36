@@ -10,6 +10,8 @@ import static java.lang.annotation.ElementType.TYPE;
 @Documented
 @Target(TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Nf3CommitMethodName {
-  String value();
+public @interface GenerateHistorySelector {
+  String atMethodName() default "at";
+
+  String toSuffix() default "To";
 }

@@ -3,8 +3,8 @@ package nf3_example_with_depinject.beans.postgres;
 import kz.greetgo.db.Jdbc;
 import kz.greetgo.depinject.core.Bean;
 import kz.greetgo.depinject.core.BeanGetter;
-import kz.greetgo.nf36.core.Nf36Saver;
-import kz.greetgo.nf36.core.Nf36Upserter;
+import kz.greetgo.nf36.core.Saver;
+import kz.greetgo.nf36.core.Upserter;
 import kz.greetgo.nf36.core.SequenceNext;
 import kz.greetgo.nf36.core.SqlLogAcceptor;
 import nf3_example_with_depinject.beans.all.SaverCreator;
@@ -26,7 +26,7 @@ public class ExampleUpserterPostgresConnector extends AbstractExampleUpserterPos
   public BeanGetter<AuthorGetter> authorGetter;
 
   @Override
-  protected Nf36Upserter createUpserter() {
+  protected Upserter createUpserter() {
     return newNf36Builder()
       .upserter()
       .database(dbTypeSource.get().currentDbType())
@@ -60,7 +60,7 @@ public class ExampleUpserterPostgresConnector extends AbstractExampleUpserterPos
   }
 
   @Override
-  protected Nf36Saver createSaver() {
+  protected Saver createSaver() {
     return newNf36Builder()
       .saver()
       .setUpserter(createUpserter())
