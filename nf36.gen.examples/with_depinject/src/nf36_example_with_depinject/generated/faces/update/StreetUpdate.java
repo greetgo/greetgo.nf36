@@ -1,7 +1,7 @@
 package nf36_example_with_depinject.generated.faces.update;
 
 import java.lang.String;
-import nf36_example_with_depinject.structure.StreetType;
+import shared_model.StreetType;
 
 public interface StreetUpdate {
   StreetUpdate setName(String name);

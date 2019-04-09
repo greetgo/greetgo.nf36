@@ -4,7 +4,7 @@ import java.lang.String;
 import java.util.Date;
 import kz.greetgo.nf36.core.Nf36HistorySelector;
 import nf36_example_with_depinject.generated.faces.history_selector.inner.ChairHistorySelector;
-import nf36_example_with_depinject.structure.inner.Chair;
+import shared_model.inner.Chair;
 
 public class ChairHistorySelectorImpl implements ChairHistorySelector {
   private final Nf36HistorySelector historySelector;

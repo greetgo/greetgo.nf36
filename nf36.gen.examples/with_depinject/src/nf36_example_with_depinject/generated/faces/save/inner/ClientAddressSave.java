@@ -4,7 +4,7 @@ import java.lang.Long;
 import java.lang.String;
 import java.util.Date;
 import java.util.function.Predicate;
-import nf36_example_with_depinject.structure.AddressType;
+import shared_model.AddressType;
 
 public interface ClientAddressSave {
   interface type {

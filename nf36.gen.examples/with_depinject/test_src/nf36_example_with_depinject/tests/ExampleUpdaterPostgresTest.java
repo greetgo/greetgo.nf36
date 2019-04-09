@@ -9,7 +9,7 @@ import nf36_example_with_depinject.generated.faces.ExampleUpdater;
 import nf36_example_with_depinject.generated.faces.ExampleUpserter;
 import nf36_example_with_depinject.jdbc.ByOne;
 import nf36_example_with_depinject.jdbc.ByOneLast;
-import nf36_example_with_depinject.structure.SomeEnum;
+import shared_model.SomeEnum;
 import nf36_example_with_depinject.util.ParentDbTests;
 import org.testng.annotations.Test;
 

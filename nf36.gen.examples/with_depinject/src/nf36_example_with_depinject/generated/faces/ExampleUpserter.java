@@ -29,7 +29,7 @@ import nf36_example_with_depinject.generated.faces.upsert.inner.WowUpsert;
 import nf36_example_with_depinject.generated.faces.upsert.transaction.OnlyIdsUpsert;
 import nf36_example_with_depinject.generated.faces.upsert.transaction.TransactionUpsert;
 import nf36_example_with_depinject.generated.faces.upsert.transaction.more.SchoolUpsert;
-import nf36_example_with_depinject.structure.SomeEnum;
+import shared_model.SomeEnum;
 
 public interface ExampleUpserter {
   ChairUpsert chair(long id1, String id2);

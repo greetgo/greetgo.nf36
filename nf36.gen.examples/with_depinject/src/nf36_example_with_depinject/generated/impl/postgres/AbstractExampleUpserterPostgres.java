@@ -59,7 +59,7 @@ import nf36_example_with_depinject.generated.impl.postgres.upsert.inner.WowUpser
 import nf36_example_with_depinject.generated.impl.postgres.upsert.transaction.OnlyIdsUpsertImpl;
 import nf36_example_with_depinject.generated.impl.postgres.upsert.transaction.TransactionUpsertImpl;
 import nf36_example_with_depinject.generated.impl.postgres.upsert.transaction.more.SchoolUpsertImpl;
-import nf36_example_with_depinject.structure.SomeEnum;
+import shared_model.SomeEnum;
 
 public abstract class AbstractExampleUpserterPostgres implements ExampleUpserter {
   protected abstract Nf36Upserter createUpserter();

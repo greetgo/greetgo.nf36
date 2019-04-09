@@ -4,7 +4,7 @@ import java.lang.String;
 import kz.greetgo.nf36.core.Nf36Updater;
 import kz.greetgo.nf36.errors.CannotBeNull;
 import nf36_example_with_depinject.generated.faces.update.StreetUpdate;
-import nf36_example_with_depinject.structure.StreetType;
+import shared_model.StreetType;
 
 public class StreetUpdateImpl implements StreetUpdate {
   private final Nf36Updater updater;

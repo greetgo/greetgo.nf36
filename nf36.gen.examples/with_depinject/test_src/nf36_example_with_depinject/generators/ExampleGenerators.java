@@ -9,7 +9,7 @@ import kz.greetgo.depinject.core.Bean;
 import kz.greetgo.depinject.core.BeanGetter;
 import kz.greetgo.depinject.core.HasAfterInject;
 import kz.greetgo.nf36.db.worker.db.DbParameters;
-import nf36_example_with_depinject.structure.Client;
+import shared_model.Client;
 
 import java.io.File;
 import java.util.ArrayList;

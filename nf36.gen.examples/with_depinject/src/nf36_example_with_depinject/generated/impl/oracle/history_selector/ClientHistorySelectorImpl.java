@@ -3,7 +3,7 @@ package nf36_example_with_depinject.generated.impl.oracle.history_selector;
 import java.util.Date;
 import kz.greetgo.nf36.core.Nf36HistorySelector;
 import nf36_example_with_depinject.generated.faces.history_selector.ClientHistorySelector;
-import nf36_example_with_depinject.structure.Client;
+import shared_model.Client;
 
 public class ClientHistorySelectorImpl implements ClientHistorySelector {
   private final Nf36HistorySelector historySelector;

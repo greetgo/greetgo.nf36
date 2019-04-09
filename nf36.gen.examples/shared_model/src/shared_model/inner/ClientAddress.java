@@ -7,9 +7,9 @@ import kz.greetgo.nf36.core.Nf3ID;
 import kz.greetgo.nf36.core.Nf3NotNull;
 import kz.greetgo.nf36.core.Nf3ReferenceTo;
 import kz.greetgo.nf36.core.Nf3Short;
-import nf36_example_with_depinject.structure.AddressType;
-import nf36_example_with_depinject.structure.Client;
-import nf36_example_with_depinject.structure.Street;
+import shared_model.AddressType;
+import shared_model.Client;
+import shared_model.Street;
 
 import java.util.Date;
 

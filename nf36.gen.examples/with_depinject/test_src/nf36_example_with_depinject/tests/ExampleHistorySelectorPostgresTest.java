@@ -7,7 +7,7 @@ import nf36_example_with_depinject.bean_containers.for_tests.BeanConfigForPostgr
 import nf36_example_with_depinject.beans.all.AuthorGetterImpl;
 import nf36_example_with_depinject.generated.faces.ExampleHistorySelector;
 import nf36_example_with_depinject.generated.faces.ExampleUpserter;
-import nf36_example_with_depinject.structure.Client;
+import shared_model.Client;
 import nf36_example_with_depinject.util.ParentDbTests;
 import org.testng.annotations.Test;
 

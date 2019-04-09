@@ -4,7 +4,7 @@ import java.lang.String;
 import kz.greetgo.nf36.core.Nf36Upserter;
 import kz.greetgo.nf36.errors.CannotBeNull;
 import nf36_example_with_depinject.generated.faces.upsert.StreetUpsert;
-import nf36_example_with_depinject.structure.StreetType;
+import shared_model.StreetType;
 
 public class StreetUpsertImpl implements StreetUpsert {
   private final Nf36Upserter upserter;

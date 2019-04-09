@@ -12,7 +12,7 @@ import nf36_example_with_depinject.jdbc.ByOneCount;
 import nf36_example_with_depinject.jdbc.ByOneLast;
 import nf36_example_with_depinject.jdbc.ByTwoCount;
 import nf36_example_with_depinject.jdbc.ByTwoLast;
-import nf36_example_with_depinject.structure.SomeEnum;
+import shared_model.SomeEnum;
 import nf36_example_with_depinject.util.ParentDbTests;
 import org.testng.annotations.Test;
 

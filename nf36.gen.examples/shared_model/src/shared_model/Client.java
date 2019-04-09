@@ -10,8 +10,8 @@ import kz.greetgo.nf36.core.Nf3NotNull;
 import kz.greetgo.nf36.core.Nf3ReferenceTo;
 import kz.greetgo.nf36.core.Nf3SaveMethodName;
 import kz.greetgo.nf36.core.Nf3Text;
-import nf36_example_with_depinject.structure.inner.Chair;
-import nf36_example_with_depinject.structure.inner.Charm;
+import shared_model.inner.Chair;
+import shared_model.inner.Charm;
 
 @Nf3Entity
 @Nf3Description("Это клиент")

@@ -4,7 +4,7 @@ import java.lang.String;
 import java.util.function.Predicate;
 import kz.greetgo.nf36.core.Nf36Saver;
 import nf36_example_with_depinject.generated.faces.save.StreetSave;
-import nf36_example_with_depinject.structure.StreetType;
+import shared_model.StreetType;
 
 public class StreetSaveImpl implements StreetSave {
   private final Nf36Saver saver13;

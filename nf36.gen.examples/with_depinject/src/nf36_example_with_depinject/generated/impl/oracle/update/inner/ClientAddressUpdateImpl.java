@@ -5,7 +5,7 @@ import java.util.Date;
 import kz.greetgo.nf36.core.Nf36Updater;
 import kz.greetgo.nf36.errors.CannotBeNull;
 import nf36_example_with_depinject.generated.faces.update.inner.ClientAddressUpdate;
-import nf36_example_with_depinject.structure.AddressType;
+import shared_model.AddressType;
 
 public class ClientAddressUpdateImpl implements ClientAddressUpdate {
   private final Nf36Updater updater;

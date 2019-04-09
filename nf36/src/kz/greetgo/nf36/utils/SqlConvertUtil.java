@@ -45,6 +45,7 @@ public class SqlConvertUtil {
     return fromSql(value, null);
   }
 
+  @SuppressWarnings("unused")
   public static Long asLong(Object fieldValue) {
     if (fieldValue == null) {
       return null;
@@ -93,7 +94,7 @@ public class SqlConvertUtil {
     }
 
     if ("oracle.sql.CLOB".equals(value.getClass().getName())
-        || "oracle.sql.NCLOB".equals(value.getClass().getName())) {
+      || "oracle.sql.NCLOB".equals(value.getClass().getName())) {
 
       try {
         return (T) value.getClass().getMethod("stringValue").invoke(value);
@@ -199,13 +200,13 @@ public class SqlConvertUtil {
 
     if (toType.isAssignableFrom(Double.class) || toType == Double.TYPE) {
       if (value instanceof Integer) {
-        return new Double((Integer) value);
+        return Double.valueOf((Integer) value);
       }
       if (value instanceof Long) {
-        return new Double(((Long) value).toString());
+        return Double.valueOf(((Long) value).toString());
       }
       if (value instanceof Float) {
-        return new Double(value.toString());
+        return Double.valueOf(value.toString());
       }
       if (value instanceof Double) {
         return value;
@@ -238,7 +239,7 @@ public class SqlConvertUtil {
           Object[] vv = (Object[]) toType.getMethod("values").invoke(null);
           if (i < 0 || i >= vv.length) {
             throw new CannotConvertFromSql("Out of range: asd = "
-                + value, value.getClass(), toType);
+              + value, value.getClass(), toType);
           }
           return vv[i];
         } catch (Exception e) {
@@ -254,7 +255,9 @@ public class SqlConvertUtil {
     }
 
     if (String.class.equals(toType)) {
-      if (value instanceof String) { return value; }
+      if (value instanceof String) {
+        return value;
+      }
       if ("oracle.sql.CLOB".equals(value.getClass().getName()) || "oracle.sql.NCLOB".equals(value.getClass().getName())) {
         try {
           return value.getClass().getMethod("stringValue").invoke(value);
@@ -327,9 +330,9 @@ public class SqlConvertUtil {
         try {
           throw new CannotConvertFromSql(
 
-              "Type " + ORACLE_TIMESTAMP_TZ + " cannot be converted to java.util.Date without java.sql.Connection",
+            "Type " + ORACLE_TIMESTAMP_TZ + " cannot be converted to java.util.Date without java.sql.Connection",
 
-              Class.forName(ORACLE_TIMESTAMP_TZ), toType);
+            Class.forName(ORACLE_TIMESTAMP_TZ), toType);
         } catch (ClassNotFoundException e) {
           throw new RuntimeException(e);
         }

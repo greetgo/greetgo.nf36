@@ -59,7 +59,7 @@ import nf36_example_with_depinject.generated.impl.oracle.upsert.inner.WowUpsertI
 import nf36_example_with_depinject.generated.impl.oracle.upsert.transaction.OnlyIdsUpsertImpl;
 import nf36_example_with_depinject.generated.impl.oracle.upsert.transaction.TransactionUpsertImpl;
 import nf36_example_with_depinject.generated.impl.oracle.upsert.transaction.more.SchoolUpsertImpl;
-import nf36_example_with_depinject.structure.SomeEnum;
+import shared_model.SomeEnum;
 
 public abstract class AbstractExampleUpserterOracle implements ExampleUpserter {
   protected abstract Nf36Upserter createUpserter();

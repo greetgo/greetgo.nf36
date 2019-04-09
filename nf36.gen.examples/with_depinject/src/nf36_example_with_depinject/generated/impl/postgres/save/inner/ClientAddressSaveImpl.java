@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.function.Predicate;
 import kz.greetgo.nf36.core.Nf36Saver;
 import nf36_example_with_depinject.generated.faces.save.inner.ClientAddressSave;
-import nf36_example_with_depinject.structure.AddressType;
+import shared_model.AddressType;
 
 public class ClientAddressSaveImpl implements ClientAddressSave {
   private final Nf36Saver saver13;

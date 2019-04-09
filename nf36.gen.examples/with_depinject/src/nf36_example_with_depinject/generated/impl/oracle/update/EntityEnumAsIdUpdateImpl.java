@@ -3,7 +3,7 @@ package nf36_example_with_depinject.generated.impl.oracle.update;
 import java.lang.String;
 import kz.greetgo.nf36.core.Nf36Updater;
 import nf36_example_with_depinject.generated.faces.update.EntityEnumAsIdUpdate;
-import nf36_example_with_depinject.structure.SomeEnum;
+import shared_model.SomeEnum;
 
 public class EntityEnumAsIdUpdateImpl implements EntityEnumAsIdUpdate {
   private final Nf36Updater updater;

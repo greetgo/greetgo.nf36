@@ -2,7 +2,7 @@ package nf36_example_with_depinject.generated.faces.update.inner;
 
 import java.lang.String;
 import java.util.Date;
-import nf36_example_with_depinject.structure.AddressType;
+import shared_model.AddressType;
 
 public interface ClientAddressUpdate {
   ClientAddressUpdate setBirthDate(Date birthDate);

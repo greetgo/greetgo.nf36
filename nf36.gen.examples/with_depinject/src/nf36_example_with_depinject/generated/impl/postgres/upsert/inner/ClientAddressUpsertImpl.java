@@ -5,7 +5,7 @@ import java.util.Date;
 import kz.greetgo.nf36.core.Nf36Upserter;
 import kz.greetgo.nf36.errors.CannotBeNull;
 import nf36_example_with_depinject.generated.faces.upsert.inner.ClientAddressUpsert;
-import nf36_example_with_depinject.structure.AddressType;
+import shared_model.AddressType;
 
 public class ClientAddressUpsertImpl implements ClientAddressUpsert {
   private final Nf36Upserter upserter;

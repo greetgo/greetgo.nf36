@@ -2,7 +2,7 @@ package nf36_example_with_depinject.generated.faces.save;
 
 import java.lang.String;
 import java.util.function.Predicate;
-import nf36_example_with_depinject.structure.StreetType;
+import shared_model.StreetType;
 
 public interface StreetSave {
   interface type {

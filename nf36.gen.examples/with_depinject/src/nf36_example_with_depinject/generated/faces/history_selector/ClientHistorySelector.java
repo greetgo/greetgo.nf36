@@ -1,7 +1,7 @@
 package nf36_example_with_depinject.generated.faces.history_selector;
 
 import java.util.Date;
-import nf36_example_with_depinject.structure.Client;
+import shared_model.Client;
 
 public interface ClientHistorySelector {
   ClientHistorySelector charmId();

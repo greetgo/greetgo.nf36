@@ -2,7 +2,7 @@ package nf36_example_with_depinject.generated.faces.upsert;
 
 import java.lang.String;
 import nf36_example_with_depinject.generated.faces.upsert.StreetUpsert;
-import nf36_example_with_depinject.structure.StreetType;
+import shared_model.StreetType;
 
 public interface StreetUpsert {
   StreetUpsert type(StreetType type);

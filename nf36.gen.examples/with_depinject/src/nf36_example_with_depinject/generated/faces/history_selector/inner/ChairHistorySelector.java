@@ -2,7 +2,7 @@ package nf36_example_with_depinject.generated.faces.history_selector.inner;
 
 import java.lang.String;
 import java.util.Date;
-import nf36_example_with_depinject.structure.inner.Chair;
+import shared_model.inner.Chair;
 
 public interface ChairHistorySelector {
   ChairHistorySelector description();
