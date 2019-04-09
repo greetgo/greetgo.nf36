@@ -3,30 +3,54 @@ package kz.greetgo.db.nf36.gen;
 import kz.greetgo.nf36.utils.UtilsNf36;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 public class JavaFilePrinter {
 
   public String packageName;
   public String classHeader;
+  private boolean printDebugMarkers = false;
 
   private final StringBuilder content = new StringBuilder();
 
   private final Map<String, String> imports = new HashMap<>();
+
+  public JavaFilePrinter(boolean printDebugMarkers) {
+    this.printDebugMarkers = printDebugMarkers;
+  }
 
   public JavaFilePrinter pr(String str) {
     content.append(str);
     return this;
   }
 
+  public JavaFilePrinter pr(String str, String debugMarker) {
+    content.append(str);
+    if (printDebugMarkers && debugMarker != null) {
+      content.append(' ');
+      content.append(debugMarker);
+    }
+    return this;
+  }
+
   public JavaFilePrinter prn(String str) {
     content.append(str).append("\n");
+    return this;
+  }
+
+  public JavaFilePrinter prn(String str, String debugMarker) {
+    content.append(str);
+    if (printDebugMarkers && debugMarker != null) {
+      content.append(debugMarker);
+    }
+    content.append("\n");
     return this;
   }
 
@@ -36,9 +60,7 @@ public class JavaFilePrinter {
   }
 
   public JavaFilePrinter ofs(int tabCount) {
-    for (int i = 0; i < tabCount; i++) {
-      content.append("  ");
-    }
+    content.append("  ".repeat(Math.max(0, tabCount)));
     return this;
   }
 
@@ -99,9 +121,9 @@ public class JavaFilePrinter {
 
   public void printToFile(File file) {
     file.getParentFile().mkdirs();
-    try (PrintStream pr = new PrintStream(file, "UTF-8")) {
+    try (PrintStream pr = new PrintStream(file, UTF_8)) {
       printTo(pr);
-    } catch (FileNotFoundException | UnsupportedEncodingException e) {
+    } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }

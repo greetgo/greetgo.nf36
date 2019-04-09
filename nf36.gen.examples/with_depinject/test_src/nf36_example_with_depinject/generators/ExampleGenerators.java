@@ -30,6 +30,7 @@ public class ExampleGenerators implements HasAfterInject {
   public void afterInject() {
     ModelCollector collector = ModelCollector
       .newCollector()
+      .setShowDebugMarkers(false)
       .setNf3Prefix(/*empty*/"")
       .setNf6Prefix(dbParameters.get().nf6prefix())
       .setEnumLength(51)

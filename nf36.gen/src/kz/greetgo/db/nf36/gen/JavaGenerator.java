@@ -618,7 +618,7 @@ public class JavaGenerator {
   private String generateThingSaveInterface(SaveInfo info) {
     String iClassName = info.interfaceClassName();
 
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = info.interfacePackageName();
     p.classHeader = "public interface " + iClassName;
 
@@ -662,7 +662,7 @@ public class JavaGenerator {
   }
 
   private String generateThingUpsertInterface(UpsertInfo info) {
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = info.interfacePackageName();
     p.classHeader = "public interface " + info.interfaceClassName();
 
@@ -699,7 +699,7 @@ public class JavaGenerator {
   }
 
   private String generateThingHistorySelectorInterface(HistorySelectorInfo info) {
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = info.interfacePackageName();
     p.classHeader = "public interface " + info.interfaceClassName();
 
@@ -749,7 +749,7 @@ public class JavaGenerator {
   }
 
   private String generateThingUpdateWhereInterface(UpdateInfo info) {
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = info.interfacePackageName();
     p.classHeader = "public interface " + info.interfaceClassName();
 
@@ -788,7 +788,7 @@ public class JavaGenerator {
   }
 
   private void generateThingSaveImpl(SaveInfo info, String baseInterfaceFullName) {
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = info.implPackageName();
     String implInterfaceName = p.i(baseInterfaceFullName);
     p.classHeader = "public class " + info.implClassName() + " implements " + implInterfaceName;
@@ -806,7 +806,7 @@ public class JavaGenerator {
 
       p.ofs(1).prn("private final " + fieldName + " " + fieldName + " = new " + fieldName + "() {");
 
-      p.ofs(2).prn("@Override /* wmn2b46b73 */");
+      p.ofs(2).prn("@Override", " /* wmn2b46b73 */");
       p.ofs(2).prn("public " + implInterfaceName + " set(" + fieldType + " value) {");
       p.ofs(3).prn(saverFieldName + ".presetValue(\"" + f.dbName() + "\", value);");
       p.ofs(3).prn("return " + info.implClassName() + ".this;");
@@ -814,13 +814,13 @@ public class JavaGenerator {
 
       String predicate = p.i(Predicate.class.getName());
 
-      p.ofs(2).prn("@Override /* j45bnj6b2v7 */");
+      p.ofs(2).prn("@Override", " /* j45bnj6b2v7 */");
       p.ofs(2).prn("public " + implInterfaceName + " skipIf(" + predicate + "<" + fieldTypeBoxed + "> " + " predicate) {");
       p.ofs(3).prn(saverFieldName + ".addSkipIf(\"" + f.dbName() + "\", predicate);");
       p.ofs(3).prn("return " + info.implClassName() + ".this;");
       p.ofs(2).prn("}").prn();
 
-      p.ofs(2).prn("@Override /* njb6hv54v74 */");
+      p.ofs(2).prn("@Override", " /* njb6hv54v74 */");
       p.ofs(2).prn("public " + implInterfaceName + " alias(String alias) {");
       p.ofs(3).prn(saverFieldName + ".addAlias(\"" + f.dbName() + "\", alias);");
       p.ofs(3).prn("return " + info.implClassName() + ".this;");
@@ -828,7 +828,7 @@ public class JavaGenerator {
 
       p.ofs(1).prn("};").prn();
 
-      p.ofs(1).prn("@Override /* fcx7f63gh6 */");
+      p.ofs(1).prn("@Override", " /* fcx7f63gh6 */");
       p.ofs(1).prn("public " + fieldName + " " + fieldName + "() {");
       p.ofs(2).prn("return " + fieldName + ";");
       p.ofs(1).prn("}").prn();
@@ -840,7 +840,7 @@ public class JavaGenerator {
   }
 
   private void generateThingHistorySelectorImpl(HistorySelectorInfo info, String baseInterfaceFullName) {
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = info.implPackageName();
     String interfaceName = p.i(baseInterfaceFullName);
     p.classHeader = "public class " + info.implClassName() + " implements " + interfaceName;
@@ -871,7 +871,7 @@ public class JavaGenerator {
         .collect(toList());
 
       for (Nf3Field f : fields) {
-        p.ofs(1).prn("@Override /* wj5gv6543 */");
+        p.ofs(1).prn("@Override", " /* wj5gv6543 */");
         p.ofs(1).prn("public " + info.interfaceClassName() + " " + f.javaName() + "() {");
         p.ofs(2).prn("historySelector.field(\"" + info.nf6TableName(f) + "\", \"" + f.dbName() + "\", null);");
         p.ofs(2).prn("return this;");
@@ -880,7 +880,7 @@ public class JavaGenerator {
         final String alias = f.javaName() + "Alias";
         final String toName = f.javaName() + info.toSuffix();
 
-        p.ofs(1).prn("@Override /* b2hhv7gv88c5 */");
+        p.ofs(1).prn("@Override", " /* b2hhv7gv88c5 */");
         p.ofs(1).prn("public " + info.interfaceClassName() + " " + toName + "(String " + alias + ") {");
         p.ofs(2).prn("historySelector.field(\"" + info.nf6TableName(f) + "\", \"" + f.dbName() + "\", null);");
         p.ofs(2).prn("historySelector.addFieldAlias(\"" + f.dbName() + "\", " + alias + ");");
@@ -889,7 +889,7 @@ public class JavaGenerator {
       }
     }
 
-    p.ofs(1).prn("@Override /* jn6hbv8uv8 */");
+    p.ofs(1).prn("@Override", " /* jn6hbv8uv8 */");
     p.ofs(1).prn("public Finish " + info.atMethodName() + "(" + p.i(Date.class) + " at) {");
     p.ofs(2).prn("historySelector.at(at);");
     p.ofs(2).prn("return finish;");
@@ -899,7 +899,7 @@ public class JavaGenerator {
 
     for (Nf3Field f : idFields) {
       String name = "aliasFor" + firstToUp(f.javaName());
-      p.ofs(2).prn("@Override /* n3kj5nb6hb67 */");
+      p.ofs(2).prn("@Override", " /* n3kj5nb6hb67 */");
       p.ofs(2).prn("public Finish " + name + "(String " + name + ") {");
       p.ofs(3).prn("historySelector.addIdAlias(\"" + f.dbName() + "\", " + name + ");");
       p.ofs(3).prn("return this;");
@@ -907,7 +907,7 @@ public class JavaGenerator {
     }
 
     {
-      p.ofs(2).prn("@Override /* wq3jb6hv7gv8c */");
+      p.ofs(2).prn("@Override", " /* wq3jb6hv7gv8c */");
       p.ofs(2).prn("public void putTo(Object destinationObject) {");
       p.ofs(3).prn("historySelector.putTo(destinationObject);");
       p.ofs(2).prn("}").prn();
@@ -915,7 +915,7 @@ public class JavaGenerator {
 
     String className = p.i(info.source());
 
-    p.ofs(2).prn("@Override /* 2jh7v7cv8cd */");
+    p.ofs(2).prn("@Override", " /* 2jh7v7cv8cd */");
     p.ofs(2).prn("public " + className + " get(" + (
 
       idFields.stream()
@@ -940,7 +940,7 @@ public class JavaGenerator {
   }
 
   private void generateThingUpsertImpl(UpsertInfo info, String baseInterfaceFullName) {
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = info.implPackageName();
     String implInterfaceName = p.i(baseInterfaceFullName);
     p.classHeader = "public class " + info.implClassName() + " implements " + implInterfaceName;
@@ -955,7 +955,7 @@ public class JavaGenerator {
     for (Nf3Field f : fields) {
       String fieldType = p.i(f.javaType().getName());
       String fieldName = f.javaName();
-      p.ofs(1).prn("@Override /* c3jv6gfc88j */");
+      p.ofs(1).prn("@Override", " /* c3jv6gfc88j */");
       p.ofs(1).prn("public " + info.interfaceClassName() + " " + fieldName + "(" + fieldType + " " + fieldName + ") {");
 
       if (f.notNullAndNotPrimitive()) {
@@ -977,7 +977,7 @@ public class JavaGenerator {
   }
 
   private void generateThingUpdateWhereImpl(UpdateInfo info, String baseInterfaceFullName) {
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = info.implPackageName();
     String implInterfaceName = p.i(baseInterfaceFullName);
     p.classHeader = "public class " + info.implClassName() + " implements " + implInterfaceName;
@@ -991,7 +991,7 @@ public class JavaGenerator {
 
       for (Nf3Field f : fields) {
         String fieldType = p.i(f.javaType().getName());
-        p.ofs(1).prn("@Override /* jh2brg6hv4g88 */");
+        p.ofs(1).prn("@Override", " /* jh2brg6hv4g88 */");
         p.ofs(1).prn("public " + info.interfaceClassName() + " " + info.setMethodName(f)
           + "(" + fieldType + " " + f.javaName() + ") {");
         p.ofs(2).prn("this.updater.setField(\"" + info.nf6TableName(f) + "\", \"" + f.dbName() + "\", " + f.javaName() + ");");
@@ -1009,7 +1009,7 @@ public class JavaGenerator {
 
       for (Nf3Field f : fields) {
         String fieldType = p.i(f.javaType().getName());
-        p.ofs(1).prn("@Override /* nr34hb47gv6 */");
+        p.ofs(1).prn("@Override", " /* nr34hb47gv6 */");
         p.ofs(1).prn("public " + info.interfaceClassName() + " " + info.whereMethodName(f)
           + "(" + fieldType + " " + f.javaName() + ") {");
 
@@ -1027,7 +1027,7 @@ public class JavaGenerator {
     }
 
     {
-      p.ofs(1).prn("@Override /* 2gv55f6x7dx */");
+      p.ofs(1).prn("@Override", " /* 2gv55f6x7dx */");
       p.ofs(1).prn("public void " + info.commitMethodName() + "() {");
       p.ofs(2).prn("this.updater.commit();");
       p.ofs(1).prn("}");
@@ -1037,7 +1037,7 @@ public class JavaGenerator {
   }
 
   private void printSaveMethodImpl(JavaFilePrinter p, SaveInfo info) {
-    p.ofs(1).prn("@Override /* 2n35b67vc8g */");
+    p.ofs(1).prn("@Override", " /* 2n35b67vc8g */");
     p.ofs(1).prn("public void " + info.saveMethodName() + "(Object objectWithData) {");
     if (collector.nf3ModifiedAtField != null) {
       p.ofs(2).prn(saverFieldName + ".putUpdateToNow(\"" + collector.nf3ModifiedAtField + "\");");
@@ -1047,7 +1047,7 @@ public class JavaGenerator {
   }
 
   private void printCommitMethodImpl(JavaFilePrinter p, UpsertInfo upsertInfo) {
-    p.ofs(1).prn("@Override /* c2j2j5h6f7cd */");
+    p.ofs(1).prn("@Override", " /* c2j2j5h6f7cd */");
     p.ofs(1).prn("public void " + upsertInfo.commitMethodName() + "() {");
     if (collector.nf3ModifiedAtField != null) {
       p.ofs(2).prn(upserterField + ".putUpdateToNowWithParent(\"" + collector.nf3ModifiedAtField + "\");");
@@ -1176,7 +1176,7 @@ public class JavaGenerator {
       return;
     }
 
-    p.ofs(1).prn("@Override /* h2hj23j45ygx */");
+    p.ofs(1).prn("@Override", " /* h2hj23j45ygx */");
     p.ofs(1).prn("public " + implInterfaceName + " " + info.moreMethodName() + "(" + (
 
       info.fields().stream()
@@ -1202,7 +1202,7 @@ public class JavaGenerator {
 
   private String generateMainHistorySelectorInterface() {
 
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = interfaceBasePackage;
     p.classHeader = "public interface " + historySelectorNames.interfaceClassName;
 
@@ -1230,7 +1230,7 @@ public class JavaGenerator {
         " Вызовете метод JavaGenerator.setUpserterClassName(...)");
     }
 
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = interfaceBasePackage;
     p.classHeader = "public interface " + upserterClassName;
 
@@ -1252,7 +1252,7 @@ public class JavaGenerator {
 
   private String generateMainUpdaterInterface() {
 
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = interfaceBasePackage;
     p.classHeader = "public interface " + updaterClassName;
 
@@ -1266,7 +1266,7 @@ public class JavaGenerator {
   }
 
   private void generateMainHistorySelectorImpl(String interfaceFullClassName) {
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = implBasePackage;
     p.classHeader = "public" + (abstracting ? " abstract" : "")
       + " class " + historySelectorNames.implClassName
@@ -1293,7 +1293,7 @@ public class JavaGenerator {
       HistorySelectorInfo info = getHistorySelectorInfo(nf3Table);
       if (info != null) {
 
-        p.ofs(1).prn("@Override /* 3vg235hj7n3 */");
+        p.ofs(1).prn("@Override", " /* 3vg235hj7n3 */");
         p.ofs(1).prn("public " + p.i(info.interfaceFullName()) + " " + info.nf3TableName() + "() {");
         p.ofs(2).prn("return new " + p.i(info.implFullName()) + "(" + createHistorySelectorMethodName + "());");
         p.ofs(1).prn("}").prn();
@@ -1307,7 +1307,7 @@ public class JavaGenerator {
 
   private void generateMainUpserterImpl(String upserterInterfaceClassName) {
 
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = implBasePackage;
     p.classHeader = "public" + (abstracting ? " abstract" : "")
       + " class " + upserterImplClassName()
@@ -1336,7 +1336,7 @@ public class JavaGenerator {
 
 
   private void generateMainUpdaterImpl(String updaterInterfaceClassName) {
-    JavaFilePrinter p = new JavaFilePrinter();
+    JavaFilePrinter p = new JavaFilePrinter(collector.showDebugMarkers());
     p.packageName = implBasePackage;
     p.classHeader = "public" + (abstracting ? " abstract" : "")
       + " class " + updaterImplClassName()
@@ -1513,7 +1513,7 @@ public class JavaGenerator {
 
     Sequence sequence = nf3Field.sequence();
 
-    p.ofs(1).prn("@Override /* gv35h1v5k5m4 */");
+    p.ofs(1).prn("@Override", " /* gv35h1v5k5m4 */");
     p.ofs(1).pr("public " + p.i(nf3Field.javaType().getName()))
       .pr(" ").pr(info.accessToEntityMethodName() + "Next" + firstToUp(nf3Field.javaName())).prn("() {");
     p.ofs(2).prn("return " + getSequenceNextMethod + "().next"
@@ -1530,7 +1530,7 @@ public class JavaGenerator {
   private void printSaveImplMethod(JavaFilePrinter p, Nf3Table nf3Table) {
     SaveInfo si = getSaveInfo(nf3Table);
 
-    p.ofs(1).prn("@Override /* 4j32j1bh54 */");
+    p.ofs(1).prn("@Override", " /* 4j32j1bh54 */");
     p.ofs(1).prn("public " + p.i(si.interfaceFullName()) + " " + si.accessToEntityMethodName() + "() {");
     p.ofs(2).prn("return new " + p.i(si.implFullName()) + "(" + saverCreateMethod + "());");
     p.ofs(1).prn("}").prn();
@@ -1539,7 +1539,7 @@ public class JavaGenerator {
   private void printUpsertImplMethod(JavaFilePrinter p, Nf3Table nf3Table) {
     UpsertInfo ui = getUpsertInfo(nf3Table);
 
-    p.ofs(1).prn("@Override /* hb54325b6h4 */");
+    p.ofs(1).prn("@Override", " /* hb54325b6h4 */");
     p.ofs(1).pr("public ").pr(p.i(ui.interfaceFullName()))
       .pr(" ").pr(ui.accessToEntityMethodName()).prn("(" + (
 
@@ -1567,7 +1567,7 @@ public class JavaGenerator {
   private void printUpdateImplMethod(JavaFilePrinter p, Nf3Table nf3Table) {
     UpdateInfo info = getUpdateInfo(nf3Table);
 
-    p.ofs(1).prn("@Override /* f323nk5b16h4b6 */");
+    p.ofs(1).prn("@Override", " /* f323nk5b16h4b6 */");
     p.ofs(1).pr("public ").pr(p.i(info.interfaceFullName())).pr(" ").pr(info.updateMethodName()).prn("() {");
     p.ofs(2).prn("return new " + p.i(info.implFullName()) + "(" + updaterCreateMethod + "());");
     p.ofs(1).prn("}").prn();

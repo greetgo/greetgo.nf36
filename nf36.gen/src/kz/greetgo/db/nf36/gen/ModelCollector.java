@@ -40,6 +40,16 @@ public class ModelCollector {
   private ClassScanner classScanner = new ClassScannerDef();
   String sourceBasePackage;
   private Path tempDir = null;
+  private boolean showDebugMarkers = false;
+
+  public ModelCollector setShowDebugMarkers(boolean showDebugMarkers) {
+    this.showDebugMarkers = showDebugMarkers;
+    return this;
+  }
+
+  public boolean showDebugMarkers() {
+    return showDebugMarkers;
+  }
 
   @SuppressWarnings("UnusedReturnValue")
   public ModelCollector setSourceBasePackage(String sourceBasePackage) {
