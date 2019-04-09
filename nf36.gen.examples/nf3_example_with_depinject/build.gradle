@@ -1,0 +1,12 @@
+dependencies {
+  compile project(':nf36.gen')
+  compile project(':nf36.gen.examples:shared_model')
+
+  compile "kz.greetgo.depinject:greetgo.depinject.testng:$depinjectVersion"
+  compile "kz.greetgo.conf:greetgo.sys_params:$configVersion"
+  compile "org.postgresql:postgresql:$pgDriverVersion"
+
+  compile fileTree(dir: rootProject.file('lib'), include: ['*.jar'])
+
+  compile project(':db.worker')
+}
