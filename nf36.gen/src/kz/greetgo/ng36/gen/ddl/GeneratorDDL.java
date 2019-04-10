@@ -1,8 +1,9 @@
-package kz.greetgo.ng36.gen;
+package kz.greetgo.ng36.gen.ddl;
 
 import java.io.File;
 
 public interface GeneratorDDL {
+
   void generateNf3Tables(File outFile);
 
   void generateSequences(File outFile);

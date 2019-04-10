@@ -1,6 +1,6 @@
 
 dependencies {
-  compile project(':nf36')
+  compile project(':nf36_old')
 
   compile group: 'kz.greetgo.class_scanner', name: 'greetgo.class_scanner', version: "$greetgoClassScannerVersion"
 
