@@ -32,4 +32,5 @@ public class SqlError extends RuntimeException {
     }
     return Type.UNKNOWN;
   }
+
 }

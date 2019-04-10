@@ -29,4 +29,5 @@ public class ExampleHistorySelectorPostgresConnector extends AbstractExampleHist
         .build()
         ;
   }
+
 }

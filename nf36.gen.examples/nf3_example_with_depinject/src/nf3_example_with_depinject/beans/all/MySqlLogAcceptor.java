@@ -8,6 +8,7 @@ import nf3_example_with_depinject.util.NoRef;
 @Bean
 @NoRef
 public class MySqlLogAcceptor implements SqlLogAcceptor {
+
   @Override
   public boolean isTraceEnabled() {
     return true;
@@ -22,4 +23,5 @@ public class MySqlLogAcceptor implements SqlLogAcceptor {
   public void accept(SqlLog sqlLog) {
     System.out.println(sqlLog.toStr(true, true, true));
   }
+
 }

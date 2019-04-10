@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public class SqlLog {
+
   public final Date happenedAt = new Date();
   @SuppressWarnings("unused")
   public final long happenedAtNano = System.nanoTime();
@@ -62,4 +63,5 @@ public class SqlLog {
 
     return sb.toString();
   }
+
 }

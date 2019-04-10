@@ -5,13 +5,16 @@ import kz.greetgo.db.Jdbc;
 import kz.greetgo.depinject.core.Bean;
 import nf3_example_with_depinject.env.DbParamsPostgres;
 import nf3_example_with_depinject.errors.SqlError;
+import nf3_example_with_depinject.util.NoRef;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 @Bean
+@NoRef
 public class JdbcPostgres implements Jdbc {
+
   @Override
   public <T> T execute(ConnectionCallback<T> connectionCallback) {
 
@@ -31,4 +34,5 @@ public class JdbcPostgres implements Jdbc {
     }
 
   }
+
 }

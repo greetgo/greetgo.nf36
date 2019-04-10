@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface Nf3Table {
+
   Class<?> source();
 
   String tableName();
@@ -49,4 +50,5 @@ public interface Nf3Table {
   }
 
   String commentQuotedForSql();
+
 }

@@ -14,6 +14,7 @@ import java.sql.SQLException;
 @Bean
 @NoRef
 public class JdbcOracle implements Jdbc {
+
   @Override
   public <T> T execute(ConnectionCallback<T> connectionCallback) {
 
@@ -32,4 +33,5 @@ public class JdbcOracle implements Jdbc {
       throw new RuntimeException(e);
     }
   }
+
 }

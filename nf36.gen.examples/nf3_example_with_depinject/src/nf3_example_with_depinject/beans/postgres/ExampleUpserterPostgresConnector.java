@@ -66,4 +66,5 @@ public class ExampleUpserterPostgresConnector extends AbstractExampleUpserterPos
       .setUpserter(createUpserter())
       .build();
   }
+
 }

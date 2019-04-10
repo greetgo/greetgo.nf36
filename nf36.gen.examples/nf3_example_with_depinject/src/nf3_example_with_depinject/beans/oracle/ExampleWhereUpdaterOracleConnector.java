@@ -33,4 +33,5 @@ public class ExampleWhereUpdaterOracleConnector extends AbstractExampleUpdaterOr
         .build()
         ;
   }
+
 }

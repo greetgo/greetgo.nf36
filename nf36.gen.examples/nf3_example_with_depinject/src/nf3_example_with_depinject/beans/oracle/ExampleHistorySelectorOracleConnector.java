@@ -21,6 +21,7 @@ public class ExampleHistorySelectorOracleConnector extends AbstractExampleHistor
 
   @Override
   protected HistorySelector createHistorySelector() {
+
     return newNf36Builder()
         .historySelector()
         .setLogAcceptor(logAcceptor.get())
@@ -28,5 +29,7 @@ public class ExampleHistorySelectorOracleConnector extends AbstractExampleHistor
         .setJdbc(jdbc.get())
         .build()
         ;
+
   }
+
 }

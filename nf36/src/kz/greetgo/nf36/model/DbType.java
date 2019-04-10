@@ -1,6 +1,7 @@
 package kz.greetgo.nf36.model;
 
 public interface DbType {
+
   SqlType sqlType();
 
   int len();
@@ -10,4 +11,5 @@ public interface DbType {
   boolean nullable();
 
   boolean sequential();
+
 }

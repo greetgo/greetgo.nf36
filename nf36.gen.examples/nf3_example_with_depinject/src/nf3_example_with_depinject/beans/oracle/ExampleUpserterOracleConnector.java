@@ -67,4 +67,5 @@ public class ExampleUpserterOracleConnector extends AbstractExampleUpserterOracl
         .setUpserter(createUpserter())
         .build();
   }
+
 }

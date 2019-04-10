@@ -14,4 +14,5 @@ public class AuthorGetterImpl implements AuthorGetter {
   public String getAuthor() {
     return author;
   }
+
 }

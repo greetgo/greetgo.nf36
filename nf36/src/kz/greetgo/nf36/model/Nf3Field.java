@@ -57,4 +57,5 @@ public interface Nf3Field {
   String commentQuotedForSql();
 
   Sequence sequence();
+
 }

@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public class UtilsNf36 {
+
   public static String calcSubPackage(String basePackageName, String packageName) {
     if (!packageName.startsWith(basePackageName)) {
       throw new IllegalPackage(basePackageName, packageName);
@@ -265,4 +266,5 @@ public class UtilsNf36 {
     }
 
   }
+
 }
