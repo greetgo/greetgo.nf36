@@ -1,7 +1,7 @@
 package nf3_example_with_depinject.jdbc;
 
 import kz.greetgo.db.ConnectionCallback;
-import kz.greetgo.nf36.utils.SqlConvertUtil;
+import kz.greetgo.ng36.util.SqlConvertUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

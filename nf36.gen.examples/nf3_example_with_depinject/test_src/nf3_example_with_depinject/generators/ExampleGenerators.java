@@ -1,15 +1,13 @@
 package nf3_example_with_depinject.generators;
 
-import kz.greetgo.db.nf36.gen.AuthorType;
-import kz.greetgo.db.nf36.gen.DdlGenerator;
-import kz.greetgo.db.nf36.gen.JavaGenerator;
-import kz.greetgo.db.nf36.gen.ModelCollector;
-import kz.greetgo.db.nf36.gen.SqlDialect;
 import kz.greetgo.depinject.core.Bean;
 import kz.greetgo.depinject.core.BeanGetter;
 import kz.greetgo.depinject.core.HasAfterInject;
 import kz.greetgo.nf36.db.worker.db.DbParameters;
-import shared_model.Client;
+import kz.greetgo.ng36.gen.GeneratorBuilder;
+import kz.greetgo.ng36.gen.GeneratorDDL;
+import kz.greetgo.ng36.gen.GeneratorJava;
+import kz.greetgo.ng36.gen.SqlDialect;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,58 +18,24 @@ import static kz.greetgo.nf36.db.worker.util.Places.nf3ExampleWithDepinject;
 @Bean
 public class ExampleGenerators implements HasAfterInject {
 
-  public BeanGetter<SqlDialect> sqlDialect;
-
   public BeanGetter<DbParameters> dbParameters;
 
-  private JavaGenerator javaGenerator;
+  public BeanGetter<SqlDialect> sqlDialect;
+
+  private GeneratorDDL generatorDDL;
+  private GeneratorJava generatorJava;
 
   @Override
   public void afterInject() {
-    ModelCollector collector = ModelCollector
-      .newCollector()
-      .setShowDebugMarkers(false)
-      .setNf3Prefix(/* Empty */"")
-      .setEnumLength(51)
-      .setNf3CreatedAtField("created_at")
-      .setNf3ModifiedAtField("mod_at")
-      .setAuthorFields("created_by", "modified_by", "inserted_by", AuthorType.STR, 37)
-      .setIdLength(31)
-      .setDefaultLength(301)
-      .setShortLength(51)
-      .setLongLength(2001)
-      .setCommitMethodName("commit")
-      .setSequencePrefix("s_")
-      .scanPackageOfClassRecursively(Client.class, true);
+    GeneratorBuilder builder = GeneratorBuilder
+      .newInstance();
 
-    javaGenerator = JavaGenerator
-      .newGenerator(collector)
-      .setInterfaceOutDir("left 1")
-      .setImplOutDir("left 2")
-      .setOutDir(nf3ExampleWithDepinject() + "/src")
-      .setCleanOutDirsBeforeGeneration(true)
-      .setInterfaceBasePackage("nf3_example_with_depinject.generated.faces")
-      .setImplBasePackage("nf3_example_with_depinject.generated.impl." + dbParameters.get().baseSubPackage())
-      .setUpserterClassName("ExampleUpserter")
-      .setUpdaterClassName("ExampleUpdater")
-      .setUpserterImplClassName("AbstractExampleUpserter" + dbParameters.get().mainClassesSuffix())
-      .setUpdaterImplClassName("AbstractExampleUpdater" + dbParameters.get().mainClassesSuffix())
-      .setGenerateSaver(true)
-      .setHistorySelectorClassName("ExampleHistorySelector",
-        "AbstractExampleHistorySelector" + dbParameters.get().mainClassesSuffix())
-      .setAbstracting(true)
-    ;
-
-    ddlGenerator = DdlGenerator.newGenerator(collector)
-      .setSqlDialect(sqlDialect.get())
-      .setCommandSeparator(";;")
-    ;
+    generatorDDL = builder.createGeneratorDDL();
+    generatorJava = builder.createGeneratorJava();
   }
 
-  private DdlGenerator ddlGenerator;
-
   public void generateJava() {
-    javaGenerator.generate();
+    generatorJava.generate();
   }
 
   public List<File> generateSqlFiles() {
@@ -80,25 +44,25 @@ public class ExampleGenerators implements HasAfterInject {
 
     {
       File outFile = new File(dir + "001_nf3_tables.sql");
-      ddlGenerator.generateNf3Tables(outFile);
+      generatorDDL.generateNf3Tables(outFile);
       sqlFileList.add(outFile);
     }
 
     {
       File outFile = new File(dir + "002_sequences.sql");
-      ddlGenerator.generateSequences(outFile);
+      generatorDDL.generateSequences(outFile);
       sqlFileList.add(outFile);
     }
 
     {
-      File outFile = new File(dir + "004_nf3_references.sql");
-      ddlGenerator.generateNf3References(outFile);
+      File outFile = new File(dir + "003_nf3_references.sql");
+      generatorDDL.generateNf3References(outFile);
       sqlFileList.add(outFile);
     }
 
     {
-      File outFile = new File(dir + "006_comments.sql");
-      ddlGenerator.generateComments(outFile);
+      File outFile = new File(dir + "004_comments.sql");
+      generatorDDL.generateComments(outFile);
       sqlFileList.add(outFile);
     }
 

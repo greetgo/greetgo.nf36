@@ -1,12 +1,12 @@
 package shared_model.inner;
 
-import kz.greetgo.nf36.core.DefaultNow;
-import kz.greetgo.nf36.core.Description;
-import kz.greetgo.nf36.core.Entity;
-import kz.greetgo.nf36.core.ID;
-import kz.greetgo.nf36.core.NotNullInDb;
-import kz.greetgo.nf36.core.ReferencesTo;
-import kz.greetgo.nf36.core.ShortLength;
+import kz.greetgo.ng36.ann.DefaultNow;
+import kz.greetgo.ng36.ann.Description;
+import kz.greetgo.ng36.ann.Entity;
+import kz.greetgo.ng36.ann.ID;
+import kz.greetgo.ng36.ann.NotNullInDb;
+import kz.greetgo.ng36.ann.ReferencesTo;
+import kz.greetgo.ng36.ann.ShortLength;
 import shared_model.AddressType;
 import shared_model.Client;
 import shared_model.Street;

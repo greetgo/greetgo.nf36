@@ -1,8 +1,8 @@
 package shared_model.transaction.more;
 
-import kz.greetgo.nf36.core.Description;
-import kz.greetgo.nf36.core.Entity;
-import kz.greetgo.nf36.core.ID;
+import kz.greetgo.ng36.ann.Description;
+import kz.greetgo.ng36.ann.Entity;
+import kz.greetgo.ng36.ann.ID;
 
 @Entity
 @SuppressWarnings("unused")

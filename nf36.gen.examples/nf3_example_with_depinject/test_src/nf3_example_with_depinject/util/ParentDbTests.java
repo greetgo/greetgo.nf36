@@ -19,9 +19,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static kz.greetgo.nf36.utils.SqlConvertUtil.fromSql;
+import static kz.greetgo.ng36.util.SqlConvertUtil.fromSql;
 
-@SuppressWarnings("SameParameterValue")
 public abstract class ParentDbTests extends AbstractDepinjectTestNg {
 
   public BeanGetter<DbParameters> dbParameters;

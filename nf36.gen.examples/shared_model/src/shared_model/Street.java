@@ -1,10 +1,10 @@
 package shared_model;
 
-import kz.greetgo.nf36.core.Description;
-import kz.greetgo.nf36.core.Entity;
-import kz.greetgo.nf36.core.ID;
-import kz.greetgo.nf36.core.Ignore;
-import kz.greetgo.nf36.core.NotNullInDb;
+import kz.greetgo.ng36.ann.Description;
+import kz.greetgo.ng36.ann.Entity;
+import kz.greetgo.ng36.ann.ID;
+import kz.greetgo.ng36.ann.Ignore;
+import kz.greetgo.ng36.ann.NotNullInDb;
 
 @Entity
 @Description("Справочник улиц")

@@ -1,10 +1,10 @@
 package shared_model;
 
-import kz.greetgo.nf36.core.DefaultValue;
-import kz.greetgo.nf36.core.Description;
-import kz.greetgo.nf36.core.Entity;
-import kz.greetgo.nf36.core.ID;
-import kz.greetgo.nf36.core.Length;
+import kz.greetgo.ng36.ann.DefaultValue;
+import kz.greetgo.ng36.ann.Description;
+import kz.greetgo.ng36.ann.Entity;
+import kz.greetgo.ng36.ann.ID;
+import kz.greetgo.ng36.ann.Length;
 
 import java.math.BigDecimal;
 

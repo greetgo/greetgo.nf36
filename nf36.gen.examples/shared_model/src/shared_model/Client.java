@@ -1,22 +1,20 @@
 package shared_model;
 
-import kz.greetgo.nf36.core.CommitMethodName;
-import kz.greetgo.nf36.core.Description;
-import kz.greetgo.nf36.core.Entity;
-import kz.greetgo.nf36.core.GenerateHistorySelector;
-import kz.greetgo.nf36.core.ID;
-import kz.greetgo.nf36.core.DepricatedNf3MoreMethodName;
-import kz.greetgo.nf36.core.NotNullInDb;
-import kz.greetgo.nf36.core.ReferencesTo;
-import kz.greetgo.nf36.core.SaveMethodName;
-import kz.greetgo.nf36.core.BigTextInDb;
+import kz.greetgo.ng36.ann.CommitMethodName;
+import kz.greetgo.ng36.ann.Description;
+import kz.greetgo.ng36.ann.GenerateHistorySelector;
+import kz.greetgo.ng36.ann.ID;
+import kz.greetgo.ng36.ann.NotNullInDb;
+import kz.greetgo.ng36.ann.ReferencesTo;
+import kz.greetgo.ng36.ann.SaveMethodName;
+import kz.greetgo.ng36.ann.BigTextInDb;
+import kz.greetgo.ng36.ann.Entity;
 import shared_model.inner.Chair;
 import shared_model.inner.Charm;
 
 @Entity
 @Description("Это клиент")
 @CommitMethodName("commitAll")
-@DepricatedNf3MoreMethodName("moreAnother")
 @SaveMethodName("saveAll")
 @SuppressWarnings("unused")
 @GenerateHistorySelector(atMethodName = "atMoment")

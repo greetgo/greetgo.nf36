@@ -1,10 +1,10 @@
 package shared_model.inner;
 
-import kz.greetgo.nf36.core.Description;
-import kz.greetgo.nf36.core.Entity;
-import kz.greetgo.nf36.core.GenerateHistorySelector;
-import kz.greetgo.nf36.core.ID;
-import kz.greetgo.nf36.core.BigTextInDb;
+import kz.greetgo.ng36.ann.Description;
+import kz.greetgo.ng36.ann.Entity;
+import kz.greetgo.ng36.ann.GenerateHistorySelector;
+import kz.greetgo.ng36.ann.ID;
+import kz.greetgo.ng36.ann.BigTextInDb;
 
 @Entity
 @Description("Это стул ' и апостроф")

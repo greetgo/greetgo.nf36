@@ -9,7 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-import static kz.greetgo.nf36.utils.SqlConvertUtil.fromSql;
+import static kz.greetgo.ng36.util.SqlConvertUtil.fromSql;
+
 
 public class Now implements ConnectionCallback<Date> {
 
