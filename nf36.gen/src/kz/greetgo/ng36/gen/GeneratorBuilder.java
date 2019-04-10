@@ -7,10 +7,12 @@ import kz.greetgo.ng36.gen.java.GeneratorJava;
 import kz.greetgo.ng36.gen.java.GeneratorJavaImpl;
 import kz.greetgo.ng36.gen.structure.StructureImpl;
 
-public class GeneratorBuilder implements GeneratorConfig {
+import java.util.List;
+
+public class GeneratorBuilder {
 
   private SqlDialect sqlDialect;
-  private String nf3TablePrefix;
+  private final EntityCollector entityCollector = new EntityCollector();
 
   private GeneratorBuilder() {}
 
@@ -27,33 +29,96 @@ public class GeneratorBuilder implements GeneratorConfig {
 
   private StructureImpl structure() {
     if (structure == null) {
-      structure = new StructureImpl(this);
+      structure = new StructureImpl(config);
       structure.collect();
     }
     return structure;
   }
 
   public GeneratorDDL createGeneratorDDL() {
-    return new GeneratorDDLImpl(this, structure());
+    return new GeneratorDDLImpl(config, structure());
   }
 
   public GeneratorJava createGeneratorJava() {
-    return new GeneratorJavaImpl(this, structure());
+    return new GeneratorJavaImpl(config, structure());
   }
 
-  @Override
-  public SqlDialect getSqlDialect() {
-    return sqlDialect;
+  public GeneratorBuilder scanEntitiesOver(Class<?> positioningClass) {
+    entityCollector.scanEntitiesOver(positioningClass);
+    return this;
   }
 
-  @Override
-  public String getNf3TablePrefix() {
-    return nf3TablePrefix;
+  private int idLength = 31;
+  private int defaultLength = 301;
+  private int shortLength = 51;
+  private int longLength = 2001;
+  private int enumLength = 51;
+
+  private final GeneratorConfig config = new GeneratorConfig() {
+    @Override
+    public SqlDialect getSqlDialect() {
+      return sqlDialect;
+    }
+
+    @Override
+    public List<Class<?>> getAllEntityClasses() {
+      return entityCollector.scan();
+    }
+
+    @Override
+    public int getIdLength() {
+      return idLength;
+    }
+
+    @Override
+    public int getDefaultLength() {
+      return defaultLength;
+    }
+
+    @Override
+    public int getShortLength() {
+      return shortLength;
+    }
+
+    @Override
+    public int getLongLength() {
+      return longLength;
+    }
+
+    @Override
+    public int getEnumLength() {
+      return enumLength;
+    }
+  };
+
+  @SuppressWarnings("unused")
+  public GeneratorBuilder setIdLength(int idLength) {
+    this.idLength = idLength;
+    return this;
   }
 
   @SuppressWarnings("unused")
-  public GeneratorBuilder setNf3TablePrefix(String nf3TablePrefix) {
-    this.nf3TablePrefix = nf3TablePrefix;
+  public GeneratorBuilder setDefaultLength(int defaultLength) {
+    this.defaultLength = defaultLength;
     return this;
   }
+
+  @SuppressWarnings("unused")
+  public GeneratorBuilder setShortLength(int shortLength) {
+    this.shortLength = shortLength;
+    return this;
+  }
+
+  @SuppressWarnings("unused")
+  public GeneratorBuilder setLongLength(int longLength) {
+    this.longLength = longLength;
+    return this;
+  }
+
+  @SuppressWarnings("unused")
+  public GeneratorBuilder setEnumLength(int enumLength) {
+    this.enumLength = enumLength;
+    return this;
+  }
+
 }

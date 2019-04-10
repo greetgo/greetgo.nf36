@@ -11,4 +11,8 @@ import static java.lang.annotation.ElementType.TYPE;
 @Documented
 @Target(TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Entity {}
+public @interface Entity {
+
+  String tableName() default "";
+
+}

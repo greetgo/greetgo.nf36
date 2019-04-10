@@ -6,8 +6,9 @@ import kz.greetgo.depinject.core.HasAfterInject;
 import kz.greetgo.nf36.db.worker.db.DbParameters;
 import kz.greetgo.ng36.gen.GeneratorBuilder;
 import kz.greetgo.ng36.gen.ddl.GeneratorDDL;
-import kz.greetgo.ng36.gen.java.GeneratorJava;
 import kz.greetgo.ng36.gen.dialect.SqlDialect;
+import kz.greetgo.ng36.gen.java.GeneratorJava;
+import shared_model.Client;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,14 +28,16 @@ public class ExampleGenerators implements HasAfterInject {
 
   @Override
   public void afterInject() {
-    GeneratorBuilder builder = GeneratorBuilder
+    var builder = GeneratorBuilder
       .newInstance()
       .setSqlDialect(sqlDialect.get())
+      .scanEntitiesOver(Client.class)
       //
       ;
 
     generatorDDL = builder.createGeneratorDDL();
     generatorJava = builder.createGeneratorJava();
+
   }
 
   public void generateJava() {
@@ -70,5 +73,7 @@ public class ExampleGenerators implements HasAfterInject {
     }
 
     return sqlFileList;
+
   }
+
 }
